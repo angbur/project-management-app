@@ -13,7 +13,7 @@ import { BoardsComponent } from './components/boards/boards.component';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
   ]
 })
 export class DashboardModule { }
