@@ -1,0 +1,31 @@
+@use '../../../../assets/scss/index' as *;
+
+#third-section {
+  background: white;
+  margin: 4rem 0;
+  padding: 4rem;
+  h2 {
+    margin: 2rem 0;
+  }
+  .section-header {
+    img {
+      position: relative;
+      width: 20px;
+      top: 3px;
+      margin-left: 10px;
+    }
+  }
+  span.logo {
+    color: $primary;
+    margin-left: 10px;
+  }
+  .row {
+    p{
+      max-width: 30vw;
+    }
+    img {
+      margin: 2rem 4rem;
+    }
+  }
+
+}
