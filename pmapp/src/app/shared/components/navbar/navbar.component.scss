@@ -1,0 +1,45 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgb(239,93,168);
+  background: linear-gradient(63deg, rgba(239,93,168,1) 35%, rgba(120,121,241,1) 100%);
+    h1 {
+      color: white;
+      letter-spacing: 2px;
+    }
+    .button-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      a {
+      color: white;
+      }
+      &:hover {
+        border: 1px solid white;
+      }
+    }
+}
+
+.button-section {
+  display: flex;
+  justify-content:flex-end;
+  gap: 0.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+  img {
+    position: relative;
+    top: 2px;
+  }
+}
+
+.startIcon {
+  height: 20px;
+}
