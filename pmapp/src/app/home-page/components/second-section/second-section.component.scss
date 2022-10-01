@@ -1,0 +1,21 @@
+@use '../../../../assets/scss/index' as *;
+
+#second-section {
+    background-image: url("/assets/img/sec-background.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  h3 {
+    color: $dark;
+    font-size: 1.5rem;
+    margin-top: 6rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  .container {
+    align-items: flex-end;
+    .box-mt >img {
+      position: relative;
+      top: 55px;
+    }
+  }
+}
