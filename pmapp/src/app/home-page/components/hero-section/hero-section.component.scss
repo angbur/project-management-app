@@ -1,0 +1,19 @@
+#hero-section {
+  background-image: url("assets/img/hero-background.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin: 2rem 0;
+  h2 {
+    margin: 2rem 3rem;
+    text-align: center;
+    line-height: 1.5;
+    margin: 2rem;
+  }
+}
