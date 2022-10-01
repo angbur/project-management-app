@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BoardsEffects } from './boards/boards.effects';
 import { reducers } from '.';
+import { SystemEffects } from './system/system.effects';
 
 @NgModule({
   declarations: [],
@@ -11,7 +12,10 @@ import { reducers } from '.';
     CommonModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([BoardsEffects]),
+    EffectsModule.forFeature([
+      BoardsEffects,
+      SystemEffects
+    ]),
   ]
 })
 export class StateModule { }

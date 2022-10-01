@@ -25,7 +25,7 @@ export const initialState: BoardsState = {
 };
 
 export function boardsReducers(
-  state = initialState, action: BoardsActions): BoardsState {
+  state = initialState, action: any): BoardsState {
   switch (action.type) {
     case BoardsActionTypes.BoardSelected:
       return {

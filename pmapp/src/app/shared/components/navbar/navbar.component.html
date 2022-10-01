@@ -5,10 +5,10 @@
   </a>
 <div class="button-section" *ngIf="!isLoggedIn; else elseBlock">
   <button class="button-text">
-    <a routerLink="/sign-up" routerLinkActive="active" ariaCurrentWhenActive="page">Sign up</a>
+    <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
   </button>
   <button class="button-primary" *ngIf="!isLoggedIn; else elseBlock">
-    <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Sign in</a>
+    <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
   </button>
 </div>
 <ng-template #elseBlock>

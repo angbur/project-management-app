@@ -6,7 +6,7 @@ import { HomePageComponent } from './home-page/home-page/home-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'sign-up', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
