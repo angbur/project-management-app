@@ -3,8 +3,9 @@
   <div class="project-container">
     <div class="project-card">
       <img src="assets/icons/plus.svg" alt=""/>
+      <p>Add new project</p>
     </div>
+    <app-boards [boards] = "boards$ | async"></app-boards>
   </div>
-  <pre>{{ boards$ | async | json }}</pre>
 </div>
 

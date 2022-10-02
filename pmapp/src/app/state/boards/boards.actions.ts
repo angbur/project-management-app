@@ -20,6 +20,7 @@ export class SelectBoard implements Action {
 
 export class LoadBoards implements Action {
   readonly type = BoardsActionTypes.LoadBoards;
+ // constructor(public payload: Board[]) { };
 };
 
 export class BoardsLoaded implements Action {

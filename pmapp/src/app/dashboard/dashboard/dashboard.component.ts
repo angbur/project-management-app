@@ -1,10 +1,9 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
 import { selectAllBoards } from 'src/app/state';
 import { AddBoard, DeleteBoard, LoadBoards, UpdateBoard } from 'src/app/state/boards/boards.actions';
 import { BoardsState } from 'src/app/state/boards/boards.reducer';
-import { getUserToken, token } from 'src/app/state/system/system.reducer';
 import { Board } from 'src/app/_services/board/board.model';
 
 @Component({
@@ -17,7 +16,7 @@ export class DashboardComponent implements OnInit {
   boards$: Observable<Board[]>;
 
   constructor(private readonly store: Store<BoardsState>) {
-    this.boards$ = store.pipe(select(selectAllBoards));
+    this.boards$ = this.store.pipe(select(selectAllBoards));
   }
 
   ngOnInit(): void {

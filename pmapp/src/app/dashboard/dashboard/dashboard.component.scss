@@ -13,8 +13,10 @@
 
 .project-card {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.8rem;
   border-radius: 8px;
   width: 200px;
   height: 200px;

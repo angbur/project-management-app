@@ -1,5 +1,5 @@
 import { Board } from '../../_services/board/board.model';
-import { BoardsActions, BoardsActionTypes } from './boards.actions';
+import { BoardsActionTypes } from './boards.actions';
 
 export const initialBoard: Board[] = [{
   _id: '',
@@ -27,6 +27,11 @@ export const initialState: BoardsState = {
 export function boardsReducers(
   state = initialState, action: any): BoardsState {
   switch (action.type) {
+    case BoardsActionTypes.LoadBoards:
+      return {
+        selectedBoardId: state.selectedBoardId,
+        boards: state.boards
+      }
     case BoardsActionTypes.BoardSelected:
       return {
         selectedBoardId: action.payload._id,
@@ -47,6 +52,11 @@ export function boardsReducers(
         selectedBoardId: state.selectedBoardId,
         boards: deleteBoard(state.boards, action.payload)
       }
+      case BoardsActionTypes.BoardsLoaded:
+        return {
+          selectedBoardId: state.selectedBoardId,
+          boards: action.payload
+        }
     default:
       return state;
   }

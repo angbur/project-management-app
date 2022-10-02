@@ -5,6 +5,7 @@ import { Login, LoginSuccess, SystemActionTypes } from './system.actions';
 
 import { AuthService } from 'src/app/_services/auth/auth.service'
 import { Router } from '@angular/router';
+import { LoadBoards } from '../boards/boards.actions';
 
 @Injectable({providedIn: 'root'})
 export class SystemEffects {
@@ -21,7 +22,7 @@ export class SystemEffects {
               }
               sessionStorage.setItem('token', user.token);
             };
-            return new LoginSuccess({token: user.token, _id: user._id});
+            return (new LoginSuccess({token: user.token, _id: user._id}));
           })
         )
     })
