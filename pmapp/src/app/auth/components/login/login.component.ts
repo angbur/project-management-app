@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Login } from 'src/app/state/system/system.actions';
-import { getSystemStatus, SystemState } from 'src/app/state/system/system.reducer';
+import { getSystemError, getSystemStatus, SystemState } from 'src/app/state/system/system.reducer';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent{
+export class LoginComponent {
   isLoggedIn: Observable<boolean>;
+  errorCode$: Observable<string | null>;
   form: LoginForm = {
     login: '',
     password: ''
@@ -21,6 +22,7 @@ export class LoginComponent{
     private readonly store: Store<SystemState>,
     private router: Router) {
       this.isLoggedIn = this.store.pipe(select(getSystemStatus));
+      this.errorCode$ =  this.store.pipe(select(getSystemError));
     }
 
     onSubmit(): void {

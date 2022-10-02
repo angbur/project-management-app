@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationData } from 'src/app/state/system/system.reducer';
-import { UserData } from '../user/user.model';
+import { AuthenticationData, AuthorizationData } from 'src/app/state/system/system.reducer';
 
 const API = 'https://whispering-refuge-23508.herokuapp.com/auth/';
 
@@ -20,11 +19,7 @@ export class AuthService {
     return this.http.post(API + 'signin', loginData, httpOptions)
   }
 
-  register(name: string, login: string, password: string): Observable<any> {
-    return this.http.post(API + 'signup', {
-      name,
-      login,
-      password
-    }, httpOptions);
+  register(registerData: AuthorizationData): Observable<any> {
+    return this.http.post(API + 'signup', registerData, httpOptions);
   }
 }

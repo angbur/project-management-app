@@ -1,6 +1,6 @@
 <main id="login-form">
   <div class="form-box">
-    <h2 >Welcome back!</h2>
+    <h2>Sign in!</h2>
       <form
         class="form"
         name="form"
@@ -8,6 +8,11 @@
         #f="ngForm"
         novalidate
       >
+        <div>
+          <div class="alert alert-danger" role="alert">
+            <p>{{errorCode$ | async | json }}</p>
+          </div>
+        </div>
         <input
           type="text"
           name="login"
@@ -20,7 +25,8 @@
           role="alert"
           *ngIf="login.errors && f.submitted"
         >
-          Login is required!
+        <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt=""/>
+        Login is required!
         </div>
         <input
           type="password"
@@ -31,6 +37,14 @@
           #password="ngModel"
           placeholder="Password"
           />
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="password.errors && f.submitted"
+        >
+          <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt=""/>
+          The password should consist of at least 6 characters!
+        </div>
         <button class="button-secondary">Login</button>
       </form>
   </div>

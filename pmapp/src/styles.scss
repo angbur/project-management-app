@@ -126,3 +126,38 @@ input {
     box-shadow: 0 0 5pt 0.5pt #D3D3D3;
   }
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  gap: 1rem;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
+  h2 {
+    font-size: 1.6rem;
+  }
+  input {
+    max-width: 200px;
+    margin-bottom: 0.5rem;
+    border: none;
+    color: rgb(239,93,168);
+  }
+}
+
+.alert-danger {
+  color: #D11A48;
+}
+
+.alert-icon {
+  height: 16px;
+  position: relative;
+  top: 3px;
+}
