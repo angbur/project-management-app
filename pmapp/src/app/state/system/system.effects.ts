@@ -6,6 +6,7 @@ import { Login, LoginError, LoginSuccess, Register, RegisterError, RegisterSucce
 import { AuthService } from 'src/app/_services/auth/auth.service'
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({providedIn: 'root'})
 export class SystemEffects {
@@ -58,7 +59,9 @@ export class SystemEffects {
 
   registerSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(SystemActionTypes.RegisterSuccess),
-    tap(() => this.goToLoginPage())
+    tap(() => {
+      this.goToLoginPage();
+      this.toastr.success('Register success!')})
   ), { dispatch: false }
   );
 
@@ -73,7 +76,8 @@ export class SystemEffects {
   constructor(
     private actions$: Actions,
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 }
 
