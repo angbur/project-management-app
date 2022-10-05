@@ -52,11 +52,11 @@ export function boardsReducers(
         selectedBoardId: state.selectedBoardId,
         boards: deleteBoard(state.boards, action.payload)
       }
-      case BoardsActionTypes.BoardsLoaded:
-        return {
-          selectedBoardId: state.selectedBoardId,
-          boards: action.payload
-        }
+    case BoardsActionTypes.BoardsLoaded:
+      return {
+        selectedBoardId: state.selectedBoardId,
+        boards: action.payload
+      }
     default:
       return state;
   }

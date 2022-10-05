@@ -23,7 +23,7 @@ export class SystemEffects {
               }
               sessionStorage.setItem('token', user.token);
             };
-            return (new LoginSuccess({token: user.token, _id: user._id}));
+            return (new LoginSuccess({token: user.token, _id: user.id}));
           }),
           catchError((error) => of(new LoginError(error.status))),
         )
@@ -41,6 +41,7 @@ export class SystemEffects {
     ofType(SystemActionTypes.Logout),
     tap((user) => {
       sessionStorage.removeItem('token');
+      this.toastr.success('Login success!');
     })), { dispatch: false }
   );
 
@@ -62,6 +63,20 @@ export class SystemEffects {
     tap(() => {
       this.goToLoginPage();
       this.toastr.success('Register success!')})
+  ), { dispatch: false }
+  );
+
+  registerError$ = createEffect(() => this.actions$.pipe(
+    ofType(SystemActionTypes.RegisterError),
+    tap(() => {
+      this.toastr.error('Failed!')})
+  ), { dispatch: false }
+  );
+
+  loginError$ = createEffect(() => this.actions$.pipe(
+    ofType(SystemActionTypes.LoginError),
+    tap(() => {
+      this.toastr.error('Failed!')})
   ), { dispatch: false }
   );
 

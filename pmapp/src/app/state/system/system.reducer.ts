@@ -79,4 +79,5 @@ export const getAuthenticationData = (state: SystemState) => state.data;
 export const getUserToken = (state: SystemState) => state.token;
 export const getSystemStatus = (state: SystemState) => state.isLoggedIn;
 export const getSystemError = (state: SystemState) => state.error;
+export const getUserId = (state: SystemState) => state.userId;
 
