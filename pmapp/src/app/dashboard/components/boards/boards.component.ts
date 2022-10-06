@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Pipe } from '@angular/core';
+import { Component, Input, OnInit, Pipe, OnChanges, SimpleChanges } from '@angular/core';
 import { Board } from 'src/app/_services/board/board.model';
 
 @Component({
@@ -6,12 +6,9 @@ import { Board } from 'src/app/_services/board/board.model';
   templateUrl: './boards.component.html',
   styleUrls: ['./boards.component.scss']
 })
-export class BoardsComponent implements OnInit {
-  @Input() boards: Board[] | null = null;
+export class BoardsComponent {
+  @Input() boards$: Board[] | null = null;
 
   constructor() {}
-
-  ngOnInit(): void {
-  }
 
 }

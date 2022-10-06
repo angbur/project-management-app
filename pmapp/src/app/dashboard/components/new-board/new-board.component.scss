@@ -1,0 +1,17 @@
+.select-input {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  color: rgb(239, 93, 168);
+  align-items: flex-start;
+    &:hover {
+        box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+    }
+}
+
+span.mat-option {
+    display: flex;
+    flex-direction: column;
+}

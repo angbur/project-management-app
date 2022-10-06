@@ -27,5 +27,10 @@ export const selectAllBoards = createSelector(
 export const selectSystemState
   = createFeatureSelector<fromSystem.SystemState>('system');
 
+export const selectUserId = createSelector(
+    selectSystemState,
+    fromSystem.getUserId
+  );
+
 export const selectUserState
   = createFeatureSelector<fromUser.UserState>('user');

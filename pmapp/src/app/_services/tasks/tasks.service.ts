@@ -12,31 +12,31 @@ export class TasksService {
 
   constructor(private http: HttpClient) { }
 
-  getAllTasksInColumn( boardId: string, columnId: string ): Observable<string> {
+  getAllTasksInColumn( boardId: string, columnId: string ): Observable<Object> {
     return this.http.get(API + boardId + '/columns/' + columnId + '/tasks', { responseType: 'text' });
   }
 
-  createTaskInColumn( boardId: string, columnId: string ): Observable<Object> {
-    return this.http.post(API + boardId + '/columns/' + columnId + '/tasks', { responseType: 'text' });
+  createTaskInColumn( data: any, boardId: string, columnId: string ): Observable<Object> {
+    return this.http.post(API + boardId + '/columns/' + columnId + '/tasks', data, { responseType: 'text' });
   }
 
-  getTaskById( boardId: string, columnId: string, taskId: string ): Observable<string> {
-    return this.http.get(API + boardId + '/columns/'+ columnId + '/tasks/' + taskId, { responseType: 'text' });
+  getTaskById( boardId: string, columnId: string, taskId: string ): Observable<Object> {
+    return this.http.get(API + boardId + '/columns/'+ columnId + '/tasks/' + taskId, { responseType: 'text' } );
   }
 
-  updateTaskById( boardId: string, columnId: string, taskId: string ): Observable<Object> {
-    return this.http.put(API + boardId + '/columns/'+ columnId + '/tasks/' + taskId, { responseType: 'text' });
+  updateTaskById( data: any, boardId: string, columnId: string, taskId: string ): Observable<Object> {
+    return this.http.put(API + boardId + '/columns/'+ columnId + '/tasks/' + taskId, data, { responseType: 'text' } );
   }
 
   deleteTaskById( boardId: string, columnId: string, taskId: string ): Observable<Object> {
-    return this.http.delete(API + boardId + '/columns/'+ columnId + '/tasks/' + taskId, { responseType: 'text' });
+    return this.http.delete(API + boardId + '/columns/'+ columnId + '/tasks/' + taskId, { responseType: 'text' } );
   }
 
   getTaskByBoardId( boardId: string ): Observable<Object> {
-    return this.http.get(API_baseURL + 'tasksSet/' + boardId, { responseType: 'text' });
+    return this.http.get(API_baseURL + 'tasksSet/' + boardId, { responseType: 'text' } );
   }
 
   searchTask( userId?: string, searchQuery?:string ): Observable<Object> {
-    return this.http.get(API_baseURL + 'tasksSet?userId=' + userId + '&search=' + searchQuery, { responseType: 'text' });
+    return this.http.get(API_baseURL + 'tasksSet?userId=' + userId + '&search=' + searchQuery, { responseType: 'text' } );
   }
 }

@@ -15,19 +15,19 @@ export class ColumnsService {
     return this.http.get(API + boardId + '/columns', { responseType: 'text' });
   }
 
-  createColumnInBoard( boardId: string ): Observable<any> {
-    return this.http.post(API + boardId + '/columns', { responseType: 'text' });
+  createColumnInBoard( data: any, boardId: string ): Observable<any> {
+    return this.http.post(API + boardId + '/columns', data, { responseType: 'text' });
   }
 
   getColumnById( boardId: string, columnId: string ): Observable<any> {
-    return this.http.get(API + boardId + '/columns/'+columnId, { responseType: 'text' });
+    return this.http.get(API + boardId + '/columns/'+ columnId, { responseType: 'text' });
   }
 
   updateColumnById( boardId: string, columnId: string ): Observable<any> {
-    return this.http.put(API + boardId + '/columns/'+columnId, { responseType: 'text' });
+    return this.http.put(API + boardId + '/columns/'+columnId, boardId, { responseType: 'text' });
   }
 
   deleteColumnById( boardId: string, columnId: string ): Observable<any> {
-    return this.http.delete(API + boardId + '/columns/'+columnId, { responseType: 'text' });
+    return this.http.delete(API + boardId + '/columns/'+columnId, { responseType: 'text' } );
   }
 }

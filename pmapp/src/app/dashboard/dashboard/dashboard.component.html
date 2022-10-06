@@ -2,10 +2,12 @@
   <h3>Your projects</h3>
   <div class="project-container">
     <div class="project-card">
-      <img src="assets/icons/plus.svg" alt=""/>
-      <p>Add new project</p>
+      <a class="link-to-form" routerLink="/dashboard/new-board">
+        <img src="assets/icons/plus.svg" alt=""/>
+        <p>Add new project</p>
+      </a>
     </div>
-    <app-boards [boards] = "boards$ | async"></app-boards>
+    <app-boards [boards$] = "boards$ | async"></app-boards>
   </div>
 </div>
 

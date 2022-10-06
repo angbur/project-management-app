@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from './user.model';
 
 const API = 'https://whispering-refuge-23508.herokuapp.com/';
 
@@ -10,16 +11,16 @@ const API = 'https://whispering-refuge-23508.herokuapp.com/';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getAllUsers(): Observable<string> {
+  getAllUsers(): Observable<Object> {
     return this.http.get(API, { responseType: 'text' });
   }
 
-  getUserById(id: string): Observable<any> {
-    return this.http.get(API + id, { responseType: 'text' });
+  getUserById(id: string): Observable<Object> {
+    return this.http.get(API + id, { responseType: 'text' } );
   }
 
-  updateUserById(id: string): Observable<string> {
-    return this.http.get(API + id, { responseType: 'text' });
+  updateUserById(data: User, id: string): Observable<Object> {
+    return this.http.put(API + id, data,{ responseType: 'text' });
   }
 
   deleteUserById(id: string): Observable<string> {
