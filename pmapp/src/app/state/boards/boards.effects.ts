@@ -1,5 +1,5 @@
 import { selectUserId } from './../index';
-import { AddBoard } from 'src/app/state/boards/boards.actions';
+import { AddBoard, BoardDeletedError, DeleteBoard } from 'src/app/state/boards/boards.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -8,7 +8,7 @@ import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { BoardsService } from '../../_services/board/boards.service';
 import { SystemState } from '../system/system.reducer';
-import { BoardsActionTypes, BoardsLoaded, BoardAdded, BoardAddedError } from './boards.actions';
+import { BoardsActionTypes, BoardsLoaded, BoardAdded, BoardAddedError, BoardDeleted } from './boards.actions';
 import { Board } from 'src/app/_services/board/board.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -54,9 +54,16 @@ export class BoardsEffects {
   ), { dispatch: false }
   );
 
-  //updateBoard$ = createEffect(() =>
-
-  //deleteBoard$ = createEffect(() =>
+  deleteBoard$ = createEffect(() => this.actions$.pipe(
+    ofType<DeleteBoard>(BoardsActionTypes.DeleteBoard),
+    mergeMap((action) =>
+    this.BoardsService.deleteBoardById(action.payload.toString())
+    .pipe(
+      map((data: Board) => new BoardDeleted(data)),
+      catchError((error) => of(new BoardDeletedError(error.status))),
+    )
+    )
+  ));
 
   goToDashboardPage(): void {
     this.router.navigate(['/dashboard']);

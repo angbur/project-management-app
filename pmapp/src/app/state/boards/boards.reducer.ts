@@ -12,7 +12,7 @@ const createBoard = (boards: Board[], board: Board) => [...boards, board];
 const updateBoard = (boards: Board[], board: Board) => boards.map(p => {
   return p._id === board._id ? Object.assign({}, board) : p;
 });
-const deleteBoard = (boards: Board[], board: Board) => boards.filter(w => board._id !== w._id);
+const deleteBoard = (boards: Board[], id: string) => boards.filter(w => id!== w._id);
 
 export interface BoardsState {
   boards: Board[],

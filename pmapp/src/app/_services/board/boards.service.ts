@@ -25,7 +25,7 @@ export class BoardsService {
   }
 
   deleteBoardById(id: string): Observable<any> {
-    return this.http.delete(API + id, { responseType: 'text' });
+    return this.http.delete(API + id, { responseType: 'json' });
   }
 
   getAllBoardsForUser(userId: string): Observable<any> {

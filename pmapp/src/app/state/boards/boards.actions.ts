@@ -11,7 +11,8 @@ export enum BoardsActionTypes {
   UpdateBoard = '[Boards] Update Data',
   BoardUpdated = '[Boards] Data Updated',
   DeleteBoard = '[Boards] Delete Data',
-  BoardDeleted = '[Boards] Delete Data'
+  BoardDeleted = '[Boards] Delete Data',
+  BoardDeletedError = '[Boards] Error Delete'
 };
 
 export class SelectBoard implements Action {
@@ -54,13 +55,18 @@ export class BoardUpdated implements Action {
 
 export class DeleteBoard implements Action {
   readonly type = BoardsActionTypes.DeleteBoard;
-  constructor(public payload: Board) { };
+  constructor(public payload: string) { };
 };
 
 export class BoardDeleted implements Action {
   readonly type = BoardsActionTypes.BoardDeleted;
   constructor(public payload: Board) { };
 };
+
+export class BoardDeletedError implements Action {
+  readonly type = BoardsActionTypes.BoardDeletedError;
+  constructor(public payload: string) { };
+}
 
 export type BoardsActions = SelectBoard
   | LoadBoards

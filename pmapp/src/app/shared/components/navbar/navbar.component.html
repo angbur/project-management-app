@@ -4,20 +4,20 @@
     <h1 class="logo">savvy</h1>
   </a>
 <div class="button-section" *ngIf="!isLoggedIn; else elseBlock">
-  <button class="button-text">
+  <button class="button button-text">
     <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
   </button>
-  <button class="button-primary" *ngIf="!isLoggedIn; else elseBlock">
+  <button class="button button-primary" *ngIf="!isLoggedIn; else elseBlock">
     <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
   </button>
 </div>
 <ng-template #elseBlock>
   <div class="button-section">
-    <button class="button-text" (click)="navigateToProfilePage()">
+    <button class="button button-text" (click)="navigateToProfilePage()">
       <img class="startIcon" src="assets/icons/user-solid.svg" alt=""/>
       {{ userName || 'Profile'}}
     </button>
-    <button class="button-primary" (click)="handleLogout()">Logout</button>
+    <button class="button button-primary" (click)="handleLogout()">Logout</button>
   </div>
 </ng-template>
 </mat-toolbar>

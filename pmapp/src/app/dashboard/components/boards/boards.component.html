@@ -1,11 +1,14 @@
 <div class="project-container">
-  <div class="project-card">
+  <div class="project-card empty-card">
     <a class="link-to-form" routerLink="/dashboard/new-board">
       <img src="assets/icons/plus.svg" alt=""/>
       <p>Add new project</p>
     </a>
   </div>
-  <div class="project-card" *ngFor="let board of boards$">
+  <div class="project-card card-with-icon" *ngFor="let board of boards$">
+    <button aria-label="Button to delete project" (click)="deleteBoard(board._id)">
+      <mat-icon>delete</mat-icon>
+    </button>
     <img src="assets/icons/clipboard-solid.svg" alt=""/>
     <p>{{ board.title }}</p>
   </div>
