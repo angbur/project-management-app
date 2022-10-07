@@ -50,9 +50,7 @@ export class SystemEffects {
     switchMap((action) => {
       return this.AuthService.register({name: action.payload.name, login: action.payload.login, password: action.payload.password})
         .pipe(
-          map((user) => {
-            return (new RegisterSuccess());
-          }),
+          map(() => new RegisterSuccess()),
           catchError((error) => of(new RegisterError(error.status))),
         )
     })
