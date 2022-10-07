@@ -12,11 +12,11 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<Object> {
-    return this.http.get(API, { responseType: 'text' });
+    return this.http.get<User[]>(API, { responseType: 'json' });
   }
 
   getUserById(id: string): Observable<Object> {
-    return this.http.get(API + id, { responseType: 'text' } );
+    return this.http.get<User>(API + id, { responseType: 'json' } );
   }
 
   updateUserById(data: User, id: string): Observable<Object> {

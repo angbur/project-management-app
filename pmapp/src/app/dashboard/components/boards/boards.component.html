@@ -1,3 +1,12 @@
-<div class="project-ex-card" *ngFor="let board of boards$">
-  <p>{{ board.title }}</p>
+<div class="project-container">
+  <div class="project-card">
+    <a class="link-to-form" routerLink="/dashboard/new-board">
+      <img src="assets/icons/plus.svg" alt=""/>
+      <p>Add new project</p>
+    </a>
+  </div>
+  <div class="project-card" *ngFor="let board of boards$">
+    <img src="assets/icons/clipboard-solid.svg" alt=""/>
+    <p>{{ board.title }}</p>
+  </div>
 </div>

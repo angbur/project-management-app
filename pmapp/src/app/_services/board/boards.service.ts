@@ -29,6 +29,6 @@ export class BoardsService {
   }
 
   getAllBoardsForUser(userId: string): Observable<any> {
-    return this.http.get('https://whispering-refuge-23508.herokuapp.com/boardsSet/' + userId, { responseType: 'text' });
+    return this.http.get<Board[]>('https://whispering-refuge-23508.herokuapp.com/boardsSet/' + userId, { responseType: 'json' });
   }
 }

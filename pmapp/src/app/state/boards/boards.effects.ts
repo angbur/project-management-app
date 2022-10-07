@@ -9,6 +9,7 @@ import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { BoardsService } from '../../_services/board/boards.service';
 import { SystemState } from '../system/system.reducer';
 import { BoardsActionTypes, BoardsLoaded } from './boards.actions';
+import { Board } from 'src/app/_services/board/board.model';
 
 @Injectable({providedIn: 'root'})
 export class BoardsEffects {
@@ -19,7 +20,7 @@ export class BoardsEffects {
     mergeMap(([action, userId]) =>
     this.BoardsService.getAllBoardsForUser(userId as string)
       .pipe(
-        map(boards => new BoardsLoaded(boards.json())),
+        map((boards: Board[]) => new BoardsLoaded(boards)),
         catchError(() => of({ type: 'Boards Loaded Error' }))
       )
     )

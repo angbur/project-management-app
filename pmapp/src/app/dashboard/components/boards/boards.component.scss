@@ -1,4 +1,12 @@
-.project-ex-card {
+.project-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.project-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,12 +15,20 @@
   border-radius: 8px;
   width: 200px;
   height: 200px;
-  box-shadow: 0px 15px 20px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
     &:hover>:first-child{
       transition: 8ms;
     }
     &:hover {
       cursor: pointer;
+      box-shadow: 0px 15px 20px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+    img {
+      height: 70px;
+      width: 70px;
+        &:hover {
+          cursor: pointer;
+          transition: 8ms;
+        }
     }
     .link-to-form {
       text-align: center;
