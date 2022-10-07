@@ -6,6 +6,7 @@ import { BoardsState } from 'src/app/state/boards/boards.reducer';
 import { Store } from '@ngrx/store';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Board, BoardData } from 'src/app/_services/board/board.model';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-board',
@@ -21,7 +22,8 @@ export class NewBoardComponent {
 
   constructor(
     private readonly store: Store<BoardsState>,
-    private readonly systemStore: Store<SystemState>) {
+    private readonly systemStore: Store<SystemState>,
+    private router: Router) {
     this.owner$ = this.systemStore.select(selectUserId);
   }
 
@@ -37,6 +39,10 @@ export class NewBoardComponent {
       }
     });
     this.store.dispatch(new AddBoard(newBoard));
+  };
+
+  handleClick(): void {
+    this.router.navigate(['/dashboard']);
   }
 
 }

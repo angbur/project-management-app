@@ -59,11 +59,17 @@ section {
 }
 
 button {
-  padding: 0.5rem 1.5rem;
+  padding: 0.6rem 1.5rem;
   cursor: pointer;
   border: none;
   border-radius: 4px;
   font-weight: 500;
+    & > img {
+      height: 16px;
+      margin: 0 0.4rem;
+      position: relative;
+      top: 3px;
+    }
 }
 
 .button-primary {
@@ -91,6 +97,15 @@ button {
   &:hover {
     transition: 20ms ease-in;
   }
+}
+
+.button-text-dark {
+  color: $dark;
+  background: white;
+  box-shadow: 0px 15px 20px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+    &:hover {
+      background: $primary-light;
+    }
 }
 
 .container {

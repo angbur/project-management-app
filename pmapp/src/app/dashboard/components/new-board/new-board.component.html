@@ -1,30 +1,34 @@
 <main id="new-board-form">
-    <div class="form-box">
-      <h2>Create new board</h2>
-        <form
-          class="form"
-          name="form"
-          (ngSubmit)="f.form.valid && onSubmit()"
-          #f="ngForm"
-          novalidate
-        >
-          <mat-label>Title</mat-label>
-          <input
-            type="text"
-            name="title"
-            [(ngModel)]="form.title"
-            required
-            #title="ngModel"
-            placeholder="Title"/>
-            <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="title.errors && f.submitted"
+  <div class="container-full">
+    <button class="button-text-dark" type="button" (click)="handleClick()">
+      <img src="assets/icons/arrow-left-solid.svg" alt="" />Dashboard</button>
+      <div class="form-box">
+        <h2>Create new board</h2>
+          <form
+            class="form"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
           >
-          <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt=""/>
-          Title is required!
-          </div>
-          <button class="button-secondary" type="button" (click)="onSubmit()" >Create new board</button>
-        </form>
+            <mat-label>Title</mat-label>
+            <input
+              type="text"
+              name="title"
+              [(ngModel)]="form.title"
+              required
+              #title="ngModel"
+              placeholder="Title"/>
+              <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="title.errors && f.submitted"
+            >
+            <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt=""/>
+            Title is required!
+            </div>
+            <button class="button-secondary" type="button" (click)="onSubmit()" >Create new board</button>
+          </form>
+      </div>
     </div>
   </main>
