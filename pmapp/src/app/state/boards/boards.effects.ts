@@ -8,7 +8,7 @@ import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { BoardsService } from '../../_services/board/boards.service';
 import { SystemState } from '../system/system.reducer';
-import { BoardsActionTypes, BoardsLoaded, BoardAdded, BoardAddedError, BoardDeleted } from './boards.actions';
+import { BoardsActionTypes, BoardsLoaded, BoardAdded, BoardAddedError, BoardDeleted, SelectBoard } from './boards.actions';
 import { Board } from 'src/app/_services/board/board.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -65,8 +65,18 @@ export class BoardsEffects {
     )
   ));
 
+  selectBoard$ = createEffect(() => this.actions$.pipe(
+    ofType<SelectBoard>(BoardsActionTypes.BoardSelected),
+    tap(() => this.goToProjectPage())
+  ), { dispatch: false }
+  );
+
   goToDashboardPage(): void {
     this.router.navigate(['/dashboard']);
+  };
+
+  goToProjectPage(): void {
+    this.router.navigate(['/dashboard/project']);
   }
 
   constructor(

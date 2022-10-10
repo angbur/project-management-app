@@ -30,7 +30,12 @@ export const selectSystemState
 export const selectUserId = createSelector(
     selectSystemState,
     fromSystem.getUserId
-  );
+);
+
+export const selectLoginStatus = createSelector(
+  selectSystemState,
+  fromSystem.getSystemStatus
+);
 
 export const selectUserState
   = createFeatureSelector<fromUser.UserState>('user');

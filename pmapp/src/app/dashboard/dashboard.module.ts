@@ -9,13 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule} from '@angular/material/icon';
+import { BoardPageComponent } from './components/board-page/board-page.component'
 
 @NgModule({
   declarations: [
     DashboardComponent,
     BoardsComponent,
-    NewBoardComponent
+    NewBoardComponent,
+    BoardPageComponent
   ],
   imports: [
     CommonModule,

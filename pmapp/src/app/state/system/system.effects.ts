@@ -41,7 +41,6 @@ export class SystemEffects {
     ofType(SystemActionTypes.Logout),
     tap((user) => {
       sessionStorage.removeItem('token');
-      this.toastr.success('Login success!');
     })), { dispatch: false }
   );
 

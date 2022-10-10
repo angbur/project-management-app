@@ -5,7 +5,7 @@
       <p>Add new project</p>
     </a>
   </div>
-  <div class="project-card card-with-icon" *ngFor="let board of boards$">
+  <div class="project-card card-with-icon" *ngFor="let board of boards" (click)="selectBoard(board._id)">
     <button aria-label="Button to delete project" (click)="deleteBoard(board._id)">
       <mat-icon>delete</mat-icon>
     </button>

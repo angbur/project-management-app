@@ -7,8 +7,8 @@
   <button class="button button-text">
     <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
   </button>
-  <button class="button button-primary" *ngIf="!isLoggedIn; else elseBlock">
-    <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+  <button class="button button-primary" routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn; else elseBlock">
+    <a ariaCurrentWhenActive="page">Login</a>
   </button>
 </div>
 <ng-template #elseBlock>
