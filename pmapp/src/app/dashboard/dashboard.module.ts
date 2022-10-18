@@ -12,13 +12,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { BoardPageComponent } from './components/board-page/board-page.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ColumnComponent } from './components/board-page/components/column/column.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     BoardsComponent,
     NewBoardComponent,
-    BoardPageComponent
+    BoardPageComponent,
+    ColumnComponent
   ],
   imports: [
     CommonModule,

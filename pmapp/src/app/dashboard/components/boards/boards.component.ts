@@ -26,10 +26,9 @@ export class BoardsComponent {
 
   selectBoard(boardId: string | undefined): void {
       this.selectedBoard = this.boards?.find(b => b._id === boardId);
-      //this.store.dispatch(selectedBoard({board: this.boards[boardId]}));
+      this.store.dispatch(selectedBoard({board: (this.selectedBoard as Board)}));
       this.goToProjectPage(boardId as string);
   };
-
 
   goToProjectPage(id: string): void {
     this.router.navigate(["dashboard/board", id]);

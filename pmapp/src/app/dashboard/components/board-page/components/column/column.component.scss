@@ -1,0 +1,70 @@
+@use '../../../../../../assets/scss/index' as *;
+
+.column-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 8px;
+  background: $primary-light;
+  height: 70vh;
+  width: 220px;
+    .column-header {
+      text-align: center;
+      width: 100%;
+      border-bottom: 2px solid white;
+      padding: 0.8rem 0.4rem;
+    }
+    .column-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .column-container {
+      width: 100%;
+    }
+    .task-item {
+      cursor:move;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.3rem;
+      margin: 0.3rem 0.6rem;
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5.7px);
+      -webkit-backdrop-filter: blur(5.7px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      color: $dark;
+        &:active {
+          box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                      0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                      0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+    }
+    h4 {
+      margin-bottom: 0;
+      color: $dark;
+    }
+    .task-menu {
+      &>img {
+        height: 14px;
+        margin: 0 0.3rem;
+        position: relative;
+        top: 1px;
+        &:hover {
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+          transition: 3ms;
+        }
+      }
+    }
+}

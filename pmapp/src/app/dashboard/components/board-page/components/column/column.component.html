@@ -1,0 +1,20 @@
+<div class="column-row">
+  <div class="column" *ngFor="let column of columns">
+    <div class="column-header">
+      <h4>{{column.title}}</h4>
+    </div>
+    <div class="column-container" >
+      <ul class="column-content">
+        <li class="task-item" cdkDrag>
+          Task 1
+          <span class="task-menu">
+            <img src="assets/icons/pen-solid.svg" alt=""/>
+            <img src="assets/icons/trash-solid.svg" alt=""/>
+          </span>
+        </li>
+        <li class="task-item" cdkDrag>Task 2</li>
+        <li class="task-item" cdkDrag>Task 3</li>
+      </ul>
+    </div>
+  </div>
+</div>

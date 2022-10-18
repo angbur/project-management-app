@@ -1,4 +1,4 @@
-import { combineReducers, createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromBoards from './boards/boards.reducer';
 import * as fromColumns from './columns/columns.reducer';
@@ -46,4 +46,12 @@ export const selectUserState
 export const getActualBoardId = createSelector(
   selectBoardState,
   fromBoards.getSelectedBoardId
+);
+
+export const selectColumnsState
+  = createFeatureSelector<fromColumns.ColumnsState>('columns');
+
+export const getActualColumnsList = createSelector(
+  selectColumnsState,
+  fromColumns.getColumns
 );

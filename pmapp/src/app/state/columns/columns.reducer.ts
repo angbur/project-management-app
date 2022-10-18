@@ -15,3 +15,5 @@ export const columnsReducers = createReducer(
   on(ColumnsActions.loadColumns, state => ({...state, columns: state.columns})),
   on(ColumnsActions.columnsLoaded, (state, {columns}) =>({columns: columns}))
 );
+
+export const getColumns = (state: ColumnsState) => state.columns;
