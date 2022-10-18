@@ -1,4 +1,3 @@
-import { Logout } from './../../../state/system/system.actions';
 import { selectLoginStatus } from './../../../state/index';
 import { select, Store } from '@ngrx/store';
 import { Component } from '@angular/core';
@@ -19,7 +18,7 @@ export class NavbarComponent {
   }
 
   handleLogout(): void {
-    this.store.dispatch(new Logout);
+    this.store.dispatch({type: '[System] Logout'});
     this.router.navigate(['/']);
   }
 

@@ -1,5 +1,5 @@
 import { User } from 'src/app/_services/user/user.model';
-import { UserActions, UserActionTypes } from './user.actions';
+import { UserActionTypes } from './user.actions';
 
 export const initialUser: User = {
   name: '',
@@ -18,6 +18,10 @@ export function userReducers(
   state = initialState, action: any): UserState {
   switch (action.type) {
     case UserActionTypes.UpdateUser:
+      return {
+        user: action.payload
+      }
+    case UserActionTypes.UserAdded:
       return {
         user: action.payload
       }

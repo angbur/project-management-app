@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { Login, LoginError, LoginSuccess, Register, RegisterError, RegisterSuccess, SystemActionTypes } from './system.actions';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/_services/auth/auth.service'
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import * as SystemActions from './system.actions';
 
 @Injectable({providedIn: 'root'})
 export class SystemEffects {
 
   login$ = createEffect(() => this.actions$.pipe(
-    ofType<Login>(SystemActionTypes.Login),
-    switchMap((action) => {
-      return this.AuthService.login({login: action.payload.login, password: action.payload.password})
+    ofType(SystemActions.login),
+    mergeMap((data: any) => {
+      return this.AuthService.login({login: data.data.login, password: data.data.password})
         .pipe(
           map((user: any) => {
             if (user.token){
@@ -23,40 +23,39 @@ export class SystemEffects {
               }
               sessionStorage.setItem('token', user.token);
             };
-            return (new LoginSuccess({token: user.token, _id: user.id}));
+            return SystemActions.loginSuccess({user});
           }),
-          catchError((error) => of(new LoginError(error.status))),
+          catchError((error) => of( SystemActions.loginError({error}))),
         )
     }
     )
   ));
 
   loginSuccess$ = createEffect(() => this.actions$.pipe(
-        ofType(SystemActionTypes.LoginSuccess),
+        ofType(SystemActions.loginSuccess),
         tap(() => this.gotoDashboard())
-    ), { dispatch: false }
-  );
+    ), { dispatch: false});
 
   logout$ = createEffect(() =>this.actions$.pipe(
-    ofType(SystemActionTypes.Logout),
-    tap((user) => {
+    ofType(SystemActions.logout),
+    tap(() => {
       sessionStorage.removeItem('token');
     })), { dispatch: false }
   );
 
   register$ = createEffect(() => this.actions$.pipe(
-    ofType<Register>(SystemActionTypes.Register),
-    switchMap((action) => {
-      return this.AuthService.register({name: action.payload.name, login: action.payload.login, password: action.payload.password})
-        .pipe(
-          map(() => new RegisterSuccess()),
-          catchError((error) => of(new RegisterError(error.status))),
-        )
+    ofType(SystemActions.register),
+    mergeMap((data: any) => {
+      return this.AuthService.register({name: data.payload.name, login: data.payload.login, password: data.payload.password})
+      .pipe(
+        map(() => ( SystemActions.registerSuccess())),
+        catchError((error) => of(SystemActions.registerError({error}))),
+      )
     })
   ));
 
   registerSuccess$ = createEffect(() => this.actions$.pipe(
-    ofType(SystemActionTypes.RegisterSuccess),
+    ofType(SystemActions.registerSuccess),
     tap(() => {
       this.goToLoginPage();
       this.toastr.success('Register success!')})
@@ -64,14 +63,14 @@ export class SystemEffects {
   );
 
   registerError$ = createEffect(() => this.actions$.pipe(
-    ofType(SystemActionTypes.RegisterError),
+    ofType(SystemActions.registerError),
     tap(() => {
       this.toastr.error('Failed!')})
   ), { dispatch: false }
   );
 
   loginError$ = createEffect(() => this.actions$.pipe(
-    ofType(SystemActionTypes.LoginError),
+    ofType(SystemActions.loginError),
     tap(() => {
       this.toastr.error('Failed!')})
   ), { dispatch: false }

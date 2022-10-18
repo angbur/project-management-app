@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Register } from 'src/app/state/system/system.actions';
+import { register } from 'src/app/state/system/system.actions';
 import { getSystemError, SystemState } from 'src/app/state/system/system.reducer';
 
 @Component({
@@ -10,7 +10,7 @@ import { getSystemError, SystemState } from 'src/app/state/system/system.reducer
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  errorMessage: string | null = null;
+  errorMessage: Error | null = null;
   form: RegisterForm = {
     name: '',
     login: '',
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.store.dispatch(new Register(this.form));
+    this.store.dispatch(register({data: this.form}));
   }
 
 }

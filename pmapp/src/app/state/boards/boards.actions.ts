@@ -1,80 +1,25 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Board } from '../../_services/board/board.model';
 
-export enum BoardsActionTypes {
-  BoardSelected = '[Boards] Selected',
-  LoadBoards = '[Boards] Load Data',
-  BoardsLoaded = '[Boards] Data Loaded',
-  AddBoard = '[Boards] Add Data',
-  BoardAdded = '[Boards] Data Added',
-  BoardAddedError = '[Boards] Error Added',
-  UpdateBoard = '[Boards] Update Data',
-  BoardUpdated = '[Boards] Data Updated',
-  DeleteBoard = '[Boards] Delete Data',
-  BoardDeleted = '[Boards] Delete Data',
-  BoardDeletedError = '[Boards] Error Delete'
-};
+export const selectedBoard = createAction('[Boards] Selected Board', props<{board: Board}>());
 
-export class SelectBoard implements Action {
-  readonly type = BoardsActionTypes.BoardSelected;
-  constructor(public payload: Board) { };
-};
+export const loadBoards = createAction('[Boards] Load Data');
 
-export class LoadBoards implements Action {
-  readonly type = BoardsActionTypes.LoadBoards;
-};
+export const boardsLoaded = createAction('[Boards] Data Loaded', props<{boards: Board[]}>());
 
-export class BoardsLoaded implements Action {
-  readonly type = BoardsActionTypes.BoardsLoaded;
-  constructor(public payload: Board[]) { };
-};
+export const addBoard = createAction('[Boards] Add Data', props<{board: Board}>());
 
-export class AddBoard implements Action {
-  readonly type = BoardsActionTypes.AddBoard;
-  constructor(public payload: Board) { };
-};
+export const boardAdded = createAction('[Boards] Data Added');
 
-export class BoardAdded implements Action {
-  readonly type = BoardsActionTypes.BoardAdded;
-};
+export const boardAddedError = createAction('[Boards] Added Error', props<{error: Error}>());
 
-export class BoardAddedError implements Action {
-  readonly type = BoardsActionTypes.BoardAddedError;
-  constructor(public payload: string) {};
-};
+export const updateBoard = createAction('[Boards] Update Data', props<{board: Board}>());
 
-export class UpdateBoard implements Action {
-  readonly type = BoardsActionTypes.UpdateBoard;
-  constructor(public payload: Board) { };
-};
+export const boardUpdated = createAction('[Boards] Data Updated');
 
-export class BoardUpdated implements Action {
-  readonly type = BoardsActionTypes.BoardUpdated;
-  constructor(public payload: Board) { };
-};
+export const deleteBoard = createAction('[Boards] Delete Data', props<{boardId: string}>());
 
-export class DeleteBoard implements Action {
-  readonly type = BoardsActionTypes.DeleteBoard;
-  constructor(public payload: string) { };
-};
+export const boardDeleted = createAction('[Boards] Board Deleted');
 
-export class BoardDeleted implements Action {
-  readonly type = BoardsActionTypes.BoardDeleted;
-  constructor(public payload: Board) { };
-};
+export const boardDeletedError = createAction('[Boards] Deleted Error', props<{error: Error}>());
 
-export class BoardDeletedError implements Action {
-  readonly type = BoardsActionTypes.BoardDeletedError;
-  constructor(public payload: string) { };
-}
-
-export type BoardsActions = SelectBoard
-  | LoadBoards
-  | BoardsLoaded
-  | AddBoard
-  | BoardAdded
-  | UpdateBoard
-  | BoardUpdated
-  | DeleteBoard
-  | BoardDeleted
-;

@@ -1,5 +1,4 @@
 import { selectUserId } from './../index';
-import { AddBoard, BoardDeletedError, DeleteBoard } from 'src/app/state/boards/boards.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -8,39 +7,39 @@ import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { BoardsService } from '../../_services/board/boards.service';
 import { SystemState } from '../system/system.reducer';
-import { BoardsActionTypes, BoardsLoaded, BoardAdded, BoardAddedError, BoardDeleted, SelectBoard } from './boards.actions';
 import { Board } from 'src/app/_services/board/board.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import * as BoardsActions from './boards.actions';
 
 @Injectable({providedIn: 'root'})
 export class BoardsEffects {
 
   loadBoards$ =  createEffect(() => this.actions$.pipe(
-    ofType(BoardsActionTypes.LoadBoards),
+    ofType(BoardsActions.loadBoards),
     withLatestFrom(this.store.select(selectUserId)),
     mergeMap(([action, userId]) =>
     this.BoardsService.getAllBoardsForUser(userId as string)
       .pipe(
-        map((boards: Board[]) => new BoardsLoaded(boards)),
-        catchError(() => of({ type: 'Boards Loaded Error' }))
+        map((boards: Board[]) => BoardsActions.boardsLoaded({boards})),
+        catchError(() => of({ type: '[Boards] Loaded Error' }))
       )
     )
   ));
 
   addBoard$ = createEffect(() => this.actions$.pipe(
-    ofType<AddBoard>(BoardsActionTypes.AddBoard),
-    mergeMap((action) =>
-    this.BoardsService.createBoard(action.payload)
+    ofType(BoardsActions.addBoard),
+    mergeMap((data: any) =>
+    this.BoardsService.createBoard(data.payload)
     .pipe(
-      map(() => new BoardAdded()),
-      catchError((error) => of(new BoardAddedError(error.status))),
+      map(() => BoardsActions.boardAdded()),
+      catchError((error: Error) => of(BoardsActions.boardAddedError({error}))),
     )
     )
   ));
 
   boardAddedSuccess$ = createEffect(() => this.actions$.pipe(
-    ofType(BoardsActionTypes.BoardAdded),
+    ofType(BoardsActions.boardAdded),
     tap(() => {
       this.goToDashboardPage(),
       this.toastr.success('Board added!')})
@@ -48,36 +47,26 @@ export class BoardsEffects {
   );
 
   boardAddedError$ = createEffect(() => this.actions$.pipe(
-    ofType(BoardsActionTypes.BoardAddedError),
+    ofType(BoardsActions.boardAddedError),
     tap(() => {
       this.toastr.error('Failed!')})
   ), { dispatch: false }
   );
 
-  deleteBoard$ = createEffect(() => this.actions$.pipe(
-    ofType<DeleteBoard>(BoardsActionTypes.DeleteBoard),
-    mergeMap((action) =>
-    this.BoardsService.deleteBoardById(action.payload.toString())
+ /*  deleteBoard$ = createEffect(() => this.actions$.pipe(
+    ofType(BoardsActions.deleteBoard),
+    mergeMap((boardId: string) =>
+    this.BoardsService.deleteBoardById(boardId)
     .pipe(
-      map((data: Board) => new BoardDeleted(data)),
-      catchError((error) => of(new BoardDeletedError(error.status))),
+      map((data: Board) => BoardsActions.boardDeleted()),
+      catchError((error) => of( BoardsActions.boardDeletedError({error}))),
     )
     )
-  ));
-
-  selectBoard$ = createEffect(() => this.actions$.pipe(
-    ofType<SelectBoard>(BoardsActionTypes.BoardSelected),
-    tap(() => this.goToProjectPage())
-  ), { dispatch: false }
-  );
+  )); */
 
   goToDashboardPage(): void {
     this.router.navigate(['/dashboard']);
   };
-
-  goToProjectPage(): void {
-    this.router.navigate(['/dashboard/project']);
-  }
 
   constructor(
     private actions$: Actions,

@@ -1,8 +1,8 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Login } from 'src/app/state/system/system.actions';
+import { login } from 'src/app/state/system/system.actions';
 import { getSystemError, getSystemStatus, SystemState } from 'src/app/state/system/system.reducer';
 
 @Component({
@@ -12,7 +12,7 @@ import { getSystemError, getSystemStatus, SystemState } from 'src/app/state/syst
 })
 export class LoginComponent {
   isLoggedIn: Observable<boolean>;
-  errorCode$: Observable<string | null>;
+  errorCode$: Observable<Error | null>;
   form: LoginForm = {
     login: '',
     password: ''
@@ -26,7 +26,7 @@ export class LoginComponent {
     }
 
     onSubmit(): void {
-      this.store.dispatch(new Login(this.form));
+      this.store.dispatch(login({data: this.form}));
     }
 
     gotoDashboard(): void {

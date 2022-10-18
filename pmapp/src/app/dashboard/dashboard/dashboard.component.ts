@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectAllBoards } from 'src/app/state';
-import { LoadBoards, UpdateBoard } from 'src/app/state/boards/boards.actions';
+import { loadBoards, updateBoard } from 'src/app/state/boards/boards.actions';
 import { BoardsState } from 'src/app/state/boards/boards.reducer';
 import { Board } from 'src/app/_services/board/board.model';
 
@@ -24,11 +24,11 @@ export class DashboardComponent implements OnInit {
   };
 
   getBoards() {
-    this.store.dispatch(new LoadBoards());
+    this.store.dispatch(loadBoards());
   };
 
   updateBoard(board: Board) {
-    this.store.dispatch(new UpdateBoard(board));
+    this.store.dispatch(updateBoard({board: board}));
   };
 
-}
+};

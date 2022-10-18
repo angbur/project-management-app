@@ -1,49 +1,17 @@
-import { Action } from "@ngrx/store";
-import { User, UserData } from "src/app/_services/user/user.model";
+import { createAction, props } from "@ngrx/store";
+import { UserData } from "src/app/_services/user/user.model";
 import { AuthenticationData, AuthorizationData } from "./system.reducer";
 
-export enum SystemActionTypes {
-  Login = '[System] Log In User',
-  LoginSuccess = '[System] Login Success',
-  LoginError = '[System] Login Error',
-  Logout = '[System] Logout',
-  Register = '[System] Register User',
-  RegisterSuccess = '[System] Register Success',
-  RegisterError = '[System] Register Error'
-};
+export const login = createAction('[System] Log in User', props<{data: AuthenticationData}>());
 
-export class Login implements Action {
-  readonly type = SystemActionTypes.Login;
-  constructor(public payload: AuthenticationData) { };
-};
+export const loginSuccess = createAction('[System] Login Success', props<{user: UserData}>());
 
-export class LoginSuccess implements Action {
-  readonly type = SystemActionTypes.LoginSuccess;
-  constructor(public payload: UserData) {};
-};
+export const loginError = createAction('[System] Log in error', props<{error: Error}>());
 
-export class LoginError implements Action {
-  readonly type = SystemActionTypes.LoginError;
-  constructor(public payload: Error) {};
-};
+export const logout = createAction('[System] Logout');
 
-export class Logout implements Action {
-  readonly type = SystemActionTypes.Logout;
-};
+export const register = createAction('[System] Register', props<{data: AuthorizationData}>());
 
-export class Register implements Action {
-  readonly type = SystemActionTypes.Register;
-  constructor(public payload: AuthorizationData) {}
-};
+export const registerSuccess = createAction('[System] Register Success');
 
-export class RegisterSuccess implements Action {
-  readonly type = SystemActionTypes.RegisterSuccess;
-};
-
-export class RegisterError implements Action {
-  readonly type = SystemActionTypes.RegisterError;
-  constructor(public payload: string) {};
-};
-
-export type SystemActions = Login | LoginSuccess | LoginError | Logout | Register | RegisterSuccess | RegisterError;
-
+export const registerError = createAction('[System] Register Error', props<{error: Error}>());

@@ -1,18 +1,21 @@
-import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import { combineReducers, createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromBoards from './boards/boards.reducer';
+import * as fromColumns from './columns/columns.reducer';
 import * as fromSystem from './system/system.reducer';
 import * as fromUser from './user/user.reducer';
 
 export interface AppState {
   boards: fromBoards.BoardsState,
+  columns: fromColumns.ColumnsState,
   system: fromSystem.SystemState,
   user: fromUser.UserState
 };
 
-export const reducers: ActionReducerMap<AppState> = {
+export const reducers = {
   boards: fromBoards.boardsReducers,
   system: fromSystem.systemReducers,
+  columns: fromColumns.columnsReducers,
   user: fromUser.userReducers
 };
 
@@ -39,3 +42,8 @@ export const selectLoginStatus = createSelector(
 
 export const selectUserState
   = createFeatureSelector<fromUser.UserState>('user');
+
+export const getActualBoardId = createSelector(
+  selectBoardState,
+  fromBoards.getSelectedBoardId
+);

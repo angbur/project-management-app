@@ -8,5 +8,5 @@ export interface User {
 
 export interface UserData {
   token: token,
-  _id: string
+  id: string
 }

@@ -1,12 +1,12 @@
+import { addBoard } from './../../../state/boards/boards.actions';
 import { selectUserId } from './../../../state/index';
-import { getUserId, SystemState } from './../../../state/system/system.reducer';
+import { SystemState } from './../../../state/system/system.reducer';
 import { Observable } from 'rxjs';
-import { AddBoard } from 'src/app/state/boards/boards.actions';
 import { BoardsState } from 'src/app/state/boards/boards.reducer';
 import { Store } from '@ngrx/store';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Board, BoardData } from 'src/app/_services/board/board.model';
-import { NavigationEnd, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-board',
@@ -38,11 +38,11 @@ export class NewBoardComponent {
         newBoard.owner = userId;
       }
     });
-    this.store.dispatch(new AddBoard(newBoard));
+    this.store.dispatch(addBoard({board: newBoard}));
   };
 
   handleClick(): void {
     this.router.navigate(['/dashboard']);
-  }
+  };
 
-}
+};

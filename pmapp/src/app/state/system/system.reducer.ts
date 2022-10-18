@@ -1,4 +1,6 @@
-import { SystemActionTypes } from "./system.actions";
+import { on } from '@ngrx/store';
+import { createReducer } from '@ngrx/store';
+import * as SystemActions from './system.actions';
 
 export interface AuthenticationData {
   login: string,
@@ -24,7 +26,7 @@ export interface SystemState {
   token: token,
   isLoggedIn: boolean,
   userId: string | null,
-  error: string | null
+  error: Error | null
 };
 
 export const initialState: SystemState = {
@@ -34,46 +36,28 @@ export const initialState: SystemState = {
   error: null
 };
 
-export function systemReducers(
-  state = initialState, action: any): SystemState {
-  switch (action.type) {
-    case SystemActionTypes.Login:
-      return {
-        ...state,
-        data: action.payload as AuthenticationData
-      }
-    case SystemActionTypes.LoginSuccess:
-        return {
-          ...state,
-          token: action.payload.token,
-          userId: action.payload._id,
-          isLoggedIn: true
-        }
-    case SystemActionTypes.Logout:
-      return {
-        ...state,
-        token: null,
-        isLoggedIn: false
-      }
-    case SystemActionTypes.LoginError:
-      return {
-        ...state,
-        error: action.payload
-      }
-    case SystemActionTypes.Register:
-      return {
-        ...state,
-        data: action.payload as AuthorizationDataPayload
-      }
-    case SystemActionTypes.RegisterError:
-      return {
-        ...state,
-        error: action.payload
-      }
-    default:
-      return state;
-  }
-};
+export const systemReducers = createReducer(
+  initialState,
+  on(SystemActions.login, (state, {data})=> ({
+    ...state,
+    data: data})),
+  on(SystemActions.loginSuccess, (state, {user})=>(
+    {...state,
+      token: user.token,
+      userId: user.id,
+      isLoggedIn: true})),
+  on(SystemActions.loginError, (state, {error})=>({
+    ...state,
+    error: error})),
+  on(SystemActions.logout, state=>({
+    ...state,
+    token: null,
+    isLoggedIn: false})),
+  on(SystemActions.register, (state) => ({...state})),
+  on(SystemActions.registerError, (state, {error})=>({
+    ...state,
+    error: error}))
+);
 
 export const getAuthenticationData = (state: SystemState) => state.data;
 export const getUserToken = (state: SystemState) => state.token;

@@ -1,5 +1,6 @@
+import { createReducer, on } from '@ngrx/store';
 import { Board } from '../../_services/board/board.model';
-import { BoardsActionTypes } from './boards.actions';
+import * as BoardsActions from './boards.actions';
 
 export const initialBoard: Board[] = [{
   _id: '',
@@ -24,43 +25,39 @@ export const initialState: BoardsState = {
   selectedBoardId: null
 };
 
-export function boardsReducers(
-  state = initialState, action: any): BoardsState {
-  switch (action.type) {
-    case BoardsActionTypes.LoadBoards:
-      return {
-        selectedBoardId: state.selectedBoardId,
-        boards: state.boards
-      }
-    case BoardsActionTypes.BoardSelected:
-      return {
-        selectedBoardId: action.payload._id,
-        boards: state.boards
-      }
-    case BoardsActionTypes.AddBoard:
-      return {
-        selectedBoardId: state.selectedBoardId,
-        boards: createBoard(state.boards, action.payload)
-      }
-    case BoardsActionTypes.UpdateBoard:
-      return {
-        selectedBoardId: state.selectedBoardId,
-        boards: updateBoard(state.boards, action.payload)
-      }
-    case BoardsActionTypes.DeleteBoard:
-      return {
-        selectedBoardId: state.selectedBoardId,
-        boards: deleteBoard(state.boards, action.payload)
-      }
-    case BoardsActionTypes.BoardsLoaded:
-      return {
-        selectedBoardId: state.selectedBoardId,
-        boards: action.payload
-      }
-    default:
-      return state;
-  }
-};
+export const boardsReducers = createReducer(
+  initialState,
+  on(BoardsActions.loadBoards, state => ({
+    ...state,
+    selectedBoardId: state.selectedBoardId,
+    boards: state.boards
+  })),
+  on(BoardsActions.selectedBoard, (state, {board}) => ({
+    ...state,
+    selectedBoardId: board._id as string,
+    boards: state.boards
+  })),
+  on(BoardsActions.addBoard, (state, {board}) => ({
+    ...state,
+    selectedBoardId: state.selectedBoardId,
+    boards: createBoard(state.boards, board)
+  })),
+  on(BoardsActions.updateBoard, (state, {board}) => ({
+    ...state,
+    selectedBoardId: state.selectedBoardId,
+    boards: updateBoard(state.boards, board)
+  })),
+  on(BoardsActions.deleteBoard, (state, {boardId}) => ({
+    ...state,
+    selectedBoardId: state.selectedBoardId,
+    boards: deleteBoard(state.boards, boardId)
+  })),
+  on(BoardsActions.boardsLoaded, (state, {boards}) => ({
+    ...state,
+    selectedBoardId: state.selectedBoardId,
+    boards: boards
+  }))
+);
 
 export const getSelectedBoardId = (state: BoardsState) => state.selectedBoardId;
 export const getBoardsForUser = (state: BoardsState) => state.boards;
