@@ -8,29 +8,28 @@ import { deleteBoard, selectedBoard } from 'src/app/state/boards/boards.actions'
 @Component({
   selector: 'app-boards',
   templateUrl: './boards.component.html',
-  styleUrls: ['./boards.component.scss']
+  styleUrls: ['./boards.component.scss'],
 })
 export class BoardsComponent {
   @Input()
   boards: Board[] | null = null;
   selectedBoard: Board | undefined = undefined;
 
-  constructor(private readonly store: Store<BoardsState>,
-    private router: Router) {}
+  constructor(private readonly store: Store<BoardsState>, private router: Router) {}
 
   deleteBoard(boardId: string | undefined): void {
     if (boardId !== undefined) {
-      this.store.dispatch(deleteBoard({boardId: boardId}));
+      this.store.dispatch(deleteBoard({ boardId: boardId }));
     }
-  };
+  }
 
   selectBoard(boardId: string | undefined): void {
-      this.selectedBoard = this.boards?.find(b => b._id === boardId);
-      this.store.dispatch(selectedBoard({board: (this.selectedBoard as Board)}));
-      this.goToProjectPage(boardId as string);
-  };
+    this.selectedBoard = this.boards?.find(b => b._id === boardId);
+    this.store.dispatch(selectedBoard({ board: this.selectedBoard as Board }));
+    this.goToProjectPage(boardId as string);
+  }
 
   goToProjectPage(id: string): void {
-    this.router.navigate(["dashboard/board", id]);
-  };
+    this.router.navigate(['dashboard/board', id]);
+  }
 }

@@ -8,9 +8,8 @@ describe('ThirdSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThirdSectionComponent ]
-    })
-    .compileComponents();
+      declarations: [ThirdSectionComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ThirdSectionComponent);
     component = fixture.componentInstance;

@@ -9,26 +9,24 @@ import { Board } from 'src/app/_services/board/board.model';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-
 export class DashboardComponent implements OnInit {
   boards$: Observable<Board[]>;
 
   constructor(private readonly store: Store<BoardsState>) {
-    this.boards$ =  this.store.pipe(select(selectAllBoards));
+    this.boards$ = this.store.pipe(select(selectAllBoards));
   }
 
   ngOnInit(): void {
     this.getBoards();
-  };
+  }
 
   getBoards() {
     this.store.dispatch(loadBoards());
-  };
+  }
 
   updateBoard(board: Board) {
-    this.store.dispatch(updateBoard({board: board}));
-  };
-
-};
+    this.store.dispatch(updateBoard({ board: board }));
+  }
+}

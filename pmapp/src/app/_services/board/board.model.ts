@@ -5,4 +5,4 @@ export interface Board {
   users?: string[];
 }
 
-export type BoardData = Pick<Board, "title" | "users">;
+export type BoardData = Pick<Board, 'title' | 'users'>;

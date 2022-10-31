@@ -3,29 +3,28 @@ import { UserActionTypes } from './user.actions';
 
 export const initialUser: User = {
   name: '',
-  login: ''
+  login: '',
 };
 
 export interface UserState {
-  user: User
-};
+  user: User;
+}
 
 export const initialState: UserState = {
-  user: initialUser
+  user: initialUser,
 };
 
-export function userReducers(
-  state = initialState, action: any): UserState {
+export function userReducers(state = initialState, action: any): UserState {
   switch (action.type) {
     case UserActionTypes.UpdateUser:
       return {
-        user: action.payload
-      }
+        user: action.payload,
+      };
     case UserActionTypes.UserAdded:
       return {
-        user: action.payload
-      }
+        user: action.payload,
+      };
     default:
       return state;
   }
-};
+}

@@ -1,7 +1,6 @@
 <div id="dashboard">
   <h3>Your projects</h3>
   <div class="project-container">
-    <app-boards [boards] = "boards$ | async"></app-boards>
+    <app-boards [boards]="boards$ | async"></app-boards>
   </div>
 </div>
-

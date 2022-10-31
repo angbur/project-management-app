@@ -9,7 +9,6 @@ import { SecondSectionComponent } from './components/second-section/second-secti
 import { DeveloperSectionComponent } from './components/developer-section/developer-section.component';
 import { ThirdSectionComponent } from './components/third-section/third-section.component';
 
-
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -17,11 +16,8 @@ import { ThirdSectionComponent } from './components/third-section/third-section.
     FirstSectionComponent,
     SecondSectionComponent,
     DeveloperSectionComponent,
-    ThirdSectionComponent
+    ThirdSectionComponent,
   ],
-  imports: [
-    CommonModule,
-    HomePageRoutingModule
-  ]
+  imports: [CommonModule, HomePageRoutingModule],
 })
-export class HomePageModule { }
+export class HomePageModule {}

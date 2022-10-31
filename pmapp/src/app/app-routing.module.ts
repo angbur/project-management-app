@@ -10,16 +10,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
-    loadChildren: ()=> import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
   },
-  { path: 'profile',
-    loadChildren: ()=> import('./profile/profile.module').then(m => m.ProfileModule)
-  },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

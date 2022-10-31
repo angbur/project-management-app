@@ -1,12 +1,12 @@
-import { token } from "src/app/state/system/system.reducer"
+import { token } from 'src/app/state/system/system.reducer';
 
 export interface User {
-  name: string,
-  login: string,
-  password?: string
+  name: string;
+  login: string;
+  password?: string;
 }
 
 export interface UserData {
-  token: token,
-  id: string
+  token: token;
+  id: string;
 }

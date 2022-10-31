@@ -2,9 +2,9 @@
   <h2>Project title</h2>
   <div class="column-row">
     <div class="empty-column">
-      <img src="assets/icons/plus.svg" alt=""/>
+      <img src="assets/icons/plus.svg" alt="" />
       <h4>Add column</h4>
     </div>
-  <app-column [columns] = "columns$ | async"></app-column>
+    <app-column [columns]="columns$ | async" [tasks]="tasks$ | async"> </app-column>
   </div>
 </div>

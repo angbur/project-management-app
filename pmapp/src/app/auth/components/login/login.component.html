@@ -1,51 +1,31 @@
 <main id="login-form">
   <div class="form-box">
     <h2>Sign in!</h2>
-      <form
-        class="form"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div>
-          <div class="alert alert-danger" role="alert">
-            <p>{{errorCode$ | async | json }}</p>
-          </div>
+    <form class="form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div>
+        <div class="alert alert-danger" role="alert">
+          <p>{{ errorCode$ | async | json }}</p>
         </div>
-        <input
-          type="text"
-          name="login"
-          [(ngModel)]="form.login"
-          required
-          #login="ngModel"
-          placeholder="Your login"/>
-          <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="login.errors && f.submitted"
-        >
-        <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt=""/>
+      </div>
+      <input type="text" name="login" [(ngModel)]="form.login" required #login="ngModel" placeholder="Your login" />
+      <div class="alert alert-danger" role="alert" *ngIf="login.errors && f.submitted">
+        <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt="" />
         Login is required!
-        </div>
-        <input
-          type="password"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          placeholder="Password"
-          />
-          <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="password.errors && f.submitted"
-        >
-          <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt=""/>
-          The password should consist <br/> of at least 6 characters!
-        </div>
-        <button class="button button-secondary">Login</button>
-      </form>
+      </div>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="form.password"
+        required
+        minlength="6"
+        #password="ngModel"
+        placeholder="Password" />
+      <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+        <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt="" />
+        The password should consist <br />
+        of at least 6 characters!
+      </div>
+      <button class="button button-secondary">Login</button>
+    </form>
   </div>
 </main>

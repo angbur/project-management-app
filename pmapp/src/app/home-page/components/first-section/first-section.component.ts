@@ -3,13 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-first-section',
   templateUrl: './first-section.component.html',
-  styleUrls: ['./first-section.component.scss']
+  styleUrls: ['./first-section.component.scss'],
 })
-export class FirstSectionComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class FirstSectionComponent {
+  constructor() {}
 }

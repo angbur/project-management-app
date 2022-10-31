@@ -6,11 +6,10 @@ import { Board } from './board.model';
 const API = 'https://whispering-refuge-23508.herokuapp.com/boards/';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BoardsService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createBoard(boardData: Board): Observable<any> {
     return this.http.post(API, boardData, { responseType: 'text' });
@@ -29,6 +28,8 @@ export class BoardsService {
   }
 
   getAllBoardsForUser(userId: string): Observable<any> {
-    return this.http.get<Board[]>('https://whispering-refuge-23508.herokuapp.com/boardsSet/' + userId, { responseType: 'json' });
+    return this.http.get<Board[]>('https://whispering-refuge-23508.herokuapp.com/boardsSet/' + userId, {
+      responseType: 'json',
+    });
   }
 }

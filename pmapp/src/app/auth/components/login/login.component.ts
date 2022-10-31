@@ -8,34 +8,31 @@ import { getSystemError, getSystemStatus, SystemState } from 'src/app/state/syst
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   isLoggedIn: Observable<boolean>;
   errorCode$: Observable<Error | null>;
   form: LoginForm = {
     login: '',
-    password: ''
+    password: '',
   };
 
-  constructor(
-    private readonly store: Store<SystemState>,
-    private router: Router) {
-      this.isLoggedIn = this.store.pipe(select(getSystemStatus));
-      this.errorCode$ =  this.store.pipe(select(getSystemError));
-    }
+  constructor(private readonly store: Store<SystemState>, private router: Router) {
+    this.isLoggedIn = this.store.pipe(select(getSystemStatus));
+    this.errorCode$ = this.store.pipe(select(getSystemError));
+  }
 
-    onSubmit(): void {
-      this.store.dispatch(login({data: this.form}));
-    }
+  onSubmit(): void {
+    this.store.dispatch(login({ data: this.form }));
+  }
 
-    gotoDashboard(): void {
-      this.router.navigate(['/dashboard']);
-    }
-
-};
+  gotoDashboard(): void {
+    this.router.navigate(['/dashboard']);
+  }
+}
 
 interface LoginForm {
-  login: string,
-  password: string
-};
+  login: string;
+  password: string;
+}

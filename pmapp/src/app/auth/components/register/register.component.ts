@@ -7,34 +7,27 @@ import { getSystemError, SystemState } from 'src/app/state/system/system.reducer
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   errorMessage: Error | null = null;
   form: RegisterForm = {
     name: '',
     login: '',
-    password: ''
+    password: '',
   };
 
-  constructor(
-    private readonly store: Store<SystemState>,
-    private router: Router
-    ) {
-      this.store.pipe(select(getSystemError)).subscribe(error=> this.errorMessage = error);
-    }
-
-  ngOnInit(): void {
+  constructor(private readonly store: Store<SystemState>, private router: Router) {
+    this.store.pipe(select(getSystemError)).subscribe(error => (this.errorMessage = error));
   }
 
   onSubmit(): void {
-    this.store.dispatch(register({data: this.form}));
+    this.store.dispatch(register({ data: this.form }));
   }
-
 }
 
 interface RegisterForm {
-  name: string,
-  login: string,
-  password: string
-};
+  name: string;
+  login: string;
+  password: string;
+}

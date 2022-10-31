@@ -11,14 +11,17 @@
   justify-content: flex-start;
   align-items: center;
   border-radius: 8px;
-  background: $primary-light;
-  height: 70vh;
+  background: $secondary-light;
   width: 220px;
     .column-header {
       text-align: center;
       width: 100%;
       border-bottom: 2px solid white;
       padding: 0.8rem 0.4rem;
+        &> h4 {
+          color: $primary-dark;
+          font-weight: 500;
+        }
     }
     .column-content {
       display: flex;
@@ -36,7 +39,7 @@
       align-items: center;
       padding: 0.3rem;
       margin: 0.3rem 0.6rem;
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.8);
       border-radius: 16px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(5.7px);
@@ -67,4 +70,44 @@
         }
       }
     }
+}
+
+.empty-task-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.3rem;
+  margin: 0.3rem 0.6rem;
+  color: white;
+  border: 1px dashed white;
+  border-radius: 4px;
+  cursor: pointer;
+    &:hover {
+      border: 1px solid white;
+    }
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+    }
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 0.3rem;
+  background: rgba(255, 255, 255, 0.9);
+  list-style: none;
+    img {
+      display: none;
+    }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+  width: 90%;
 }

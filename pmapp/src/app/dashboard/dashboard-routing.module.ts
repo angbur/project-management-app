@@ -5,13 +5,13 @@ import { NewBoardComponent } from './components/new-board/new-board.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path:'', component: DashboardComponent },
-  { path:'new-board', component: NewBoardComponent },
-  { path: 'board/:id', component: BoardPageComponent }
+  { path: '', component: DashboardComponent },
+  { path: 'new-board', component: NewBoardComponent },
+  { path: 'board/:id', component: BoardPageComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}

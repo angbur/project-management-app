@@ -1,9 +1,9 @@
-import { HTTP_INTERCEPTORS, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { getUserToken, SystemState, token } from '../state/system/system.reducer';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { SystemState } from '../state/system/system.reducer';
 
 const TOKEN_HEADER = 'Authorization';
 
@@ -23,9 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     return next.handle(authReq);
   }
-};
+}
 
-export const authInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-];
-
+export const authInterceptorProviders = [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }];

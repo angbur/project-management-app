@@ -7,21 +7,15 @@ import { BoardsComponent } from './components/boards/boards.component';
 import { NewBoardComponent } from './components/new-board/new-board.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { BoardPageComponent } from './components/board-page/board-page.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColumnComponent } from './components/board-page/components/column/column.component';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    BoardsComponent,
-    NewBoardComponent,
-    BoardPageComponent,
-    ColumnComponent
-  ],
+  declarations: [DashboardComponent, BoardsComponent, NewBoardComponent, BoardPageComponent, ColumnComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -31,7 +25,7 @@ import { ColumnComponent } from './components/board-page/components/column/colum
     MatTooltipModule,
     MatButtonModule,
     MatIconModule,
-    DragDropModule
-  ]
+    DragDropModule,
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

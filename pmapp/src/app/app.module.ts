@@ -1,3 +1,4 @@
+import { TasksEffects } from './state/tasks/tasks.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,9 +21,7 @@ import { ColumnsEffects } from './state/columns/columns.effects';
 import { SystemEffects } from './state/system/system.effects';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,13 +34,9 @@ import { SystemEffects } from './state/system/system.effects';
     ToastrModule.forRoot(),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
-    EffectsModule.forRoot([
-      BoardsEffects,
-      ColumnsEffects,
-      SystemEffects
-  ]),
+    EffectsModule.forRoot([BoardsEffects, ColumnsEffects, SystemEffects, TasksEffects]),
   ],
   providers: [authInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
