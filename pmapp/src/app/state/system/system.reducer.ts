@@ -51,6 +51,7 @@ export const systemReducers = createReducer(
   on(SystemActions.loginError, (state, { error }) => ({
     ...state,
     error: error,
+    isLoggedIn: false,
   })),
   on(SystemActions.logout, state => ({
     ...state,
