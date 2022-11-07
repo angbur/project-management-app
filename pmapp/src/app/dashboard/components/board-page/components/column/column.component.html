@@ -17,8 +17,18 @@
         <li class="task-item" cdkDrag *ngFor="let task of tasksEntities[i].tasks">
           {{ task.title }}
           <span class="task-menu">
-            <img src="assets/icons/pen-solid.svg" alt="" />
-            <img src="assets/icons/trash-solid.svg" alt="" />
+            <button
+              class="button-icon"
+              type="button"
+              (click)="update(columns ? columns[i]._id.toString() : '', task, task._id)">
+              <img src="assets/icons/pen-solid.svg" alt="" />
+            </button>
+            <button
+              class="button-icon"
+              type="button"
+              (click)="delete(columns ? columns[i]._id.toString() : '', task._id)">
+              <img src="assets/icons/trash-solid.svg" alt="" />
+            </button>
           </span>
         </li>
       </ul>

@@ -1,3 +1,5 @@
+import { TaskSet, NewTask } from 'src/app/_services/tasks/task.model';
+import { updateTask } from './../../../../../state/tasks/tasks.actions';
 import { Component, Input, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,8 +10,8 @@ import { Task, TasksEntities } from 'src/app/_services/tasks/task.model';
 import { NewTaskModalComponent } from '../new-task-modal/new-task-modal.component';
 import { isColumns, isTasks } from './type.guard';
 import { getNumberOfColumn } from './getNumbersOfColumns';
-import { TaskSet, NewTask } from 'src/app/_services/tasks/task.model';
-import { addTask, updateTasksSet } from 'src/app/state/tasks/tasks.actions';
+import { addTask, deleteTask, updateTasksSet } from 'src/app/state/tasks/tasks.actions';
+import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 
 @Component({
   selector: 'app-column',
@@ -135,6 +137,26 @@ export class ColumnComponent implements OnChanges {
       if (result) this.store.dispatch(addTask({task: task, colId: colId}));
     });
   };
+
+  delete(colId: string, taskId: string) {
+    this.store.dispatch(deleteTask({colId: colId, taskId: taskId}));
+  };
+
+  update(colId: string, task: Task, taskId: string) {
+    const {_id, boardId, ...rest} = task;
+    const updatedTask: NewTask = Object.assign({}, rest);
+    const dialogRef = this.dialog.open(UpdateTaskModalComponent, {
+      width: '250px',
+      data: task.title,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      updatedTask.title = JSON.parse(JSON.stringify(result));
+      if (result) this.store.dispatch(updateTask({task: updatedTask, colId: colId, taskId: taskId}));
+    });
+
+  };
+
 };
 
 

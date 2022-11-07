@@ -1,0 +1,12 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <h2>Update task</h2>
+    <div class="modal-content">
+      <input matInput [(ngModel)]="title" placeholder="Title of new task" />
+    </div>
+    <div class="modal-footer" mat-dialog-actions>
+      <button class="button button-tertiary" (click)="onNoClick()">Back</button>
+      <button class="button button-secondary" [mat-dialog-close]="title" cdkFocusInitial>Update task</button>
+    </div>
+  </div>
+</div>

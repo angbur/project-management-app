@@ -1,17 +1,17 @@
-import { BoardsState } from 'src/app/state/boards/boards.reducer';
-import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
-import { TasksState } from './tasks.reducer';
 import { of } from 'rxjs';
+import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+
+import { TasksState } from './tasks.reducer';
+import { BoardsState } from 'src/app/state/boards/boards.reducer';
 import * as TasksActions from './tasks.actions';
 import { NewTask, Task } from 'src/app/_services/tasks/task.model';
-import { TasksService } from './../../_services/tasks/tasks.service';
+import { TasksService } from 'src/app/_services/tasks/tasks.service';
 import { getActualBoardId, selectUserId } from './../index';
-import { ColumnsState } from '../columns/columns.reducer';
 import { SystemState } from '../system/system.reducer';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class TasksEffects {
@@ -28,7 +28,7 @@ export class TasksEffects {
     )
   );
 
-  updateTask$ = createEffect(() =>
+  updateTaskSet$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.updateTasksSet),
       mergeMap((data: any) =>
@@ -80,14 +80,38 @@ export class TasksEffects {
     { dispatch: false }
   );
 
+  deleteTask$ = createEffect(()=>
+    this.actions$.pipe(
+      ofType(TasksActions.deleteTask),
+      withLatestFrom(this.boardStore.select(getActualBoardId)),
+    mergeMap(([action, boardId]) =>
+      this.TasksService.deleteTaskById(isString(boardId) ? boardId : '', action.colId, action.taskId)
+      .pipe(
+      map((data) => TasksActions.taskDeleted({task: data as Task})),
+      catchError(error => of(TasksActions.taskDeletedError({ error })))
+      )
+    )
+    )
+  );
 
+  updateTask$ = createEffect(()=>
+    this.actions$.pipe(
+      ofType(TasksActions.updateTask),
+      withLatestFrom(this.boardStore.select(getActualBoardId)),
+      mergeMap(([action, boardId]) =>
+      this.TasksService.updateTaskById(action.task, isString(boardId) ? boardId : '', action.colId, action.taskId )
+      .pipe(
+      map((data) => TasksActions.taskUpdated({task: data as Task})),
+      catchError(error => of(TasksActions.taskUpdatedError({ error })))
+      ))
+    )
+  )
 
   constructor(
     private actions$: Actions,
     private TasksService: TasksService,
     private readonly taskStore: Store<TasksState>,
     private readonly boardStore: Store<BoardsState>,
-    private readonly columnStore: Store<ColumnsState>,
     private readonly systemStore: Store<SystemState>,
     private toastr: ToastrService
   ) {}

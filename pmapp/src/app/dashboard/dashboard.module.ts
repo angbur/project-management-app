@@ -17,9 +17,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ColumnComponent } from './components/board-page/components/column/column.component';
 import { NewColumnModalComponent } from './components/board-page/components/new-column-modal/new-column-modal.component';
 import { NewTaskModalComponent } from './components/board-page/components/new-task-modal/new-task-modal.component';
+import { UpdateTaskModalComponent } from './components/board-page/components/update-task-modal/update-task-modal.component';
 
 @NgModule({
-  declarations: [DashboardComponent, BoardsComponent, NewBoardComponent, BoardPageComponent, ColumnComponent, NewColumnModalComponent, NewTaskModalComponent],
+  declarations: [DashboardComponent, BoardsComponent, NewBoardComponent, BoardPageComponent, ColumnComponent, NewColumnModalComponent, NewTaskModalComponent, UpdateTaskModalComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
