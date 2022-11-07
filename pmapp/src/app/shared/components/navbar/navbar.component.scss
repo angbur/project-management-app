@@ -18,9 +18,13 @@
       color: white;
       }
       &:hover {
-        border: 1px solid white;
+        box-shadow: inset 0px 0px 0px 1px white;
       }
     }
+}
+
+#button-logout {
+  margin-left: 1rem;
 }
 
 .button-section {

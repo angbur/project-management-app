@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/_services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -17,10 +17,7 @@ export class SystemEffects {
         return this.AuthService.login({ login: data.data.login, password: data.data.password }).pipe(
           map((user: any) => {
             if (user.token) {
-              if (sessionStorage.getItem('token')) {
-                sessionStorage.clear();
-              }
-              sessionStorage.setItem('token', user.token);
+              this.AuthService.setToken(user.token);
             }
             return SystemActions.loginSuccess({ user });
           }),
@@ -44,7 +41,8 @@ export class SystemEffects {
       this.actions$.pipe(
         ofType(SystemActions.logout),
         tap(() => {
-          sessionStorage.removeItem('token');
+          this.AuthService.logout();
+          this.router.navigate(['/']);
         })
       ),
     { dispatch: false }

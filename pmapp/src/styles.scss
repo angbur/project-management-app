@@ -58,54 +58,6 @@ section {
   align-items: center;
 }
 
-.button {
-  padding: 0.6rem 1.5rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
-    & > img {
-      height: 16px;
-      margin: 0 0.4rem;
-      position: relative;
-    }
-}
-
-.button-primary {
-  background: white;
-  color: $secondary;
-  &:hover {
-    box-shadow: 0px 15px 20px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
-    transition: 20ms ease-in;
-  }
-}
-
-.button-secondary {
-  background: $secondary;
-  color: white;
-  &:hover {
-    background: $secondary-light;
-    box-shadow: 0px 15px 20px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
-    transition: 20ms ease-in;
-  }
-}
-
-.button-text {
-  background: none;
-  color: white;
-  &:hover {
-    transition: 20ms ease-in;
-  }
-}
-
-.button-text-dark {
-  color: $dark;
-  background: white;
-    &:hover {
-      box-shadow: 0px 15px 20px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
-    }
-}
-
 .container {
   display: flex;
   justify-content: space-evenly;
@@ -135,11 +87,11 @@ input {
   padding: 0.6rem 1rem;
   border-radius: 8px;
   border: none;
+  color: $primary;
   &:hover{
     box-shadow: 0 0 5pt 0.5pt #D3D3D3;
   }
 }
-
 .form {
   display: flex;
   flex-direction: column;
@@ -158,6 +110,7 @@ input {
     font-size: 1.6rem;
   }
   input {
+    background: $tertiary;
     max-width: 200px;
     margin-bottom: 0.5rem;
     border: none;
@@ -179,3 +132,4 @@ ul {
   list-style: none;
   padding: 0;
 }
+

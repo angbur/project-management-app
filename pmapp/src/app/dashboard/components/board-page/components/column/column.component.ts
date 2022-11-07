@@ -1,10 +1,15 @@
-import { Store } from '@ngrx/store';
-import { TaskSet } from './../../../../../_services/tasks/task.model';
-import { updateTasksSet } from 'src/app/state/tasks/tasks.actions';
 import { Component, Input, OnChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
 import { Column } from 'src/app/_services/columns/column.model';
 import { Task, TasksEntities } from 'src/app/_services/tasks/task.model';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { NewTaskModalComponent } from '../new-task-modal/new-task-modal.component';
+import { isColumns, isTasks } from './type.guard';
+import { getNumberOfColumn } from './getNumbersOfColumns';
+import { TaskSet, NewTask } from 'src/app/_services/tasks/task.model';
+import { addTask, updateTasksSet } from 'src/app/state/tasks/tasks.actions';
 
 @Component({
   selector: 'app-column',
@@ -14,15 +19,19 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 export class ColumnComponent implements OnChanges {
   @Input()
   columns: Column[] | null = null;
-
   @Input()
   tasks: Task[] | null = null;
-
   columnsIds: number[] = [];
-
   tasksEntities: TasksEntities = {};
+  newTask: NewTask = {
+    title: '',
+    order: 0,
+    description: 'some description',
+    userId: '',
+    users: []
+  };
 
-  constructor(private readonly store: Store<TaskState>) {}
+  constructor( private readonly store: Store<TaskState>, public dialog: MatDialog ) {}
 
   ngOnChanges(): void {
     if (isColumns(this.columns) && isTasks(this.tasks)) {
@@ -42,11 +51,11 @@ export class ColumnComponent implements OnChanges {
         this.tasksEntities[colId].tasks.sort((a, b) => a.order - b.order);
       }
     }
-  }
+  };
 
   dropTask(event: CdkDragDrop<Task[]>) {
-    const previousColumnIndex: number = ColumnComponent.getNumberOfColumn(event.previousContainer.id);
-    const newColumnIndex: number = ColumnComponent.getNumberOfColumn(event.container.id);
+    const previousColumnIndex: number = getNumberOfColumn(event.previousContainer.id);
+    const newColumnIndex: number = getNumberOfColumn(event.container.id);
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -54,43 +63,47 @@ export class ColumnComponent implements OnChanges {
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       this.setNewTasksSetInColumn(previousColumnIndex, newColumnIndex);
-    }
-  }
+    };
+  };
 
   setNewTasksSetInColumn(prevId: number, newId: number) {
     this.setNewOrderForTasks(prevId);
     this.setNewColumnId(newId);
     this.setNewOrderForTasks(newId);
     this.updateNewTasks(this.tasksEntities);
-  }
+  };
 
   setNewOrderForTasks(id: number) {
-    let arr = Array.from(this.tasksEntities[id].tasks);
+    if(this.tasksEntities[id]){
+      let arr = Array.from(this.tasksEntities[id].tasks);
     let newTasksList: Task[] = [];
 
     for (let i = 0; i < arr.length; i += 1) {
       const newTask: Task = Object.assign({}, arr[i]);
       newTask.order = i;
       newTasksList.push(newTask);
-    }
+    };
 
     newTasksList.sort((a, b) => a.order - b.order);
     this.tasksEntities[id].tasks = newTasksList;
-  }
+    };
+  };
 
   setNewColumnId(colId: number) {
-    let arr = Array.from(this.tasksEntities[colId].tasks);
-    let newTasksList: Task[] = [];
+    if(this.tasksEntities[colId]){
+      let arr = Array.from(this.tasksEntities[colId].tasks);
+      let newTasksList: Task[] = [];
 
-    if (isColumns(this.columns)) {
-      for (let i = 0; i < arr.length; i += 1) {
-        const newTask: Task = Object.assign({}, arr[i]);
-        newTask.columnId = this.columns[colId]._id;
-        newTasksList.push(newTask);
-      }
-    }
-    this.tasksEntities[colId].tasks = newTasksList;
-  }
+      if (isColumns(this.columns)) {
+        for (let i = 0; i < arr.length; i += 1) {
+          const newTask: Task = Object.assign({}, arr[i]);
+          newTask.columnId = this.columns[colId]._id;
+          newTasksList.push(newTask);
+        };
+      };
+      this.tasksEntities[colId].tasks = newTasksList;
+    };
+  };
 
   updateNewTasks(tasksEntities: TasksEntities) {
     let newTasks: Task[] = [];
@@ -106,17 +119,22 @@ export class ColumnComponent implements OnChanges {
     }
 
     this.store.dispatch(updateTasksSet({ tasks: taskSetData }));
-  }
+  };
 
-  static getNumberOfColumn(containerId: string) {
-    return parseInt(containerId.split('-').reverse()[0]);
-  }
-}
+  addNewTask(colId: string, colNumber: number){
+    const dialogRef = this.dialog.open(NewTaskModalComponent, {
+      width: '250px',
+      data: this.newTask.title,
+    });
 
-export function isTasks(tasks: Task[] | null): tasks is Task[] {
-  return (tasks as Task[]) !== undefined && (tasks as Task[]) !== null && Array.isArray(tasks as Task[]);
-}
+    dialogRef.afterClosed().subscribe(result => {
+      const newOrder: number = this.tasksEntities[colNumber].tasks.length;
+      const task = Object.assign({}, this.newTask);
+      task.order = JSON.parse(JSON.stringify(newOrder));
+      task.title = JSON.parse(JSON.stringify(result));
+      if (result) this.store.dispatch(addTask({task: task, colId: colId}));
+    });
+  };
+};
 
-export function isColumns(columns: Column[] | null): columns is Column[] {
-  return (columns as Column[]) !== undefined && (columns as Column[]) !== null && Array.isArray(columns as Column[]);
-}
+

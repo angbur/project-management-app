@@ -2,7 +2,8 @@
 
 .column-row {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 2rem;
 }
 .column {
@@ -73,6 +74,7 @@
 }
 
 .empty-task-item {
+  background: none;
   display: flex;
   justify-content: flex-start;
   align-items: center;

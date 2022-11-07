@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,10 +13,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BoardPageComponent } from './components/board-page/board-page.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatDialogModule} from '@angular/material/dialog';
 import { ColumnComponent } from './components/board-page/components/column/column.component';
+import { NewColumnModalComponent } from './components/board-page/components/new-column-modal/new-column-modal.component';
+import { NewTaskModalComponent } from './components/board-page/components/new-task-modal/new-task-modal.component';
 
 @NgModule({
-  declarations: [DashboardComponent, BoardsComponent, NewBoardComponent, BoardPageComponent, ColumnComponent],
+  declarations: [DashboardComponent, BoardsComponent, NewBoardComponent, BoardPageComponent, ColumnComponent, NewColumnModalComponent, NewTaskModalComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -26,6 +30,8 @@ import { ColumnComponent } from './components/board-page/components/column/colum
     MatButtonModule,
     MatIconModule,
     DragDropModule,
+    SharedModule,
+    MatDialogModule
   ],
 })
 export class DashboardModule {}

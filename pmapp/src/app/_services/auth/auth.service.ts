@@ -2,7 +2,7 @@ import { selectLoginStatus } from './../../state/index';
 import { getSystemStatus } from './../../state/system/system.reducer';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthenticationData, AuthorizationData, SystemState } from 'src/app/state/system/system.reducer';
 import { Store } from '@ngrx/store';
 
@@ -23,6 +23,10 @@ export class AuthService {
     return this.http.post(API + 'signin', loginData, httpOptions);
   };
 
+  logout(): void {
+    sessionStorage.removeItem('token');
+  };
+
   register(registerData: AuthorizationData): Observable<any> {
     return this.http.post(API + 'signup', registerData, httpOptions);
   };
@@ -30,4 +34,12 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     return this.store.select(selectLoginStatus);
   };
-}
+
+  getToken(): Observable<string | null> {
+    return of(sessionStorage.getItem('token') ? sessionStorage.getItem('token') : null)
+  };
+
+  setToken(token: string): void {
+    sessionStorage.setItem('token', token);
+  };
+};

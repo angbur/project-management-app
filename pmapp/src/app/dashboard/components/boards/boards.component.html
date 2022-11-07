@@ -1,4 +1,4 @@
-<div class="project-container">
+<div class="project-container" *ngIf="(status | async) !== 'loading...'; else spinner">
   <div class="project-card empty-card">
     <a class="link-to-form" routerLink="/dashboard/new-board">
       <img src="assets/icons/plus.svg" alt="" />
@@ -13,3 +13,9 @@
     <p>{{ board.title }}</p>
   </div>
 </div>
+<ng-template #spinner>
+  {{ status | async }}
+  <div class="container">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>

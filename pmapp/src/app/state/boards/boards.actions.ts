@@ -7,6 +7,8 @@ export const loadBoards = createAction('[Boards] Load Data');
 
 export const boardsLoaded = createAction('[Boards] Data Loaded', props<{ boards: Board[] }>());
 
+export const loadBoardsError = createAction('[Boards] Load Error',  props<{ error: Error }>());
+
 export const addBoard = createAction('[Boards] Add Data', props<{ board: Board }>());
 
 export const boardAdded = createAction('[Boards] Data Added');

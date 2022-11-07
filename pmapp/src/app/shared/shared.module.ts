@@ -12,6 +12,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [NavbarComponent, FooterComponent, SpinnerComponent],
   imports: [CommonModule, MatToolbarModule, RouterModule, MatProgressSpinnerModule],
-  exports: [NavbarComponent, FooterComponent],
+  exports: [NavbarComponent, FooterComponent, SpinnerComponent],
 })
 export class SharedModule {}

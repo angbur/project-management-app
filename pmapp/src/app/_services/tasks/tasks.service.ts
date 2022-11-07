@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TaskSet } from './task.model';
+import { Task, TaskSet, NewTask } from './task.model';
 
 const API_baseURL = 'https://whispering-refuge-23508.herokuapp.com/';
 const API = API_baseURL + 'boards/';
@@ -10,14 +10,14 @@ const API = API_baseURL + 'boards/';
   providedIn: 'root',
 })
 export class TasksService {
-  [x: string]: any;
+
   constructor(private http: HttpClient) {}
 
   getAllTasksInColumn(boardId: string, columnId: string): Observable<Object> {
     return this.http.get(API + boardId + '/columns/' + columnId + '/tasks', { responseType: 'json' });
   }
 
-  createTaskInColumn(data: any, boardId: string, columnId: string): Observable<Object> {
+  createTaskInColumn(data: NewTask, boardId: string, columnId: string): Observable<Object> {
     return this.http.post(API + boardId + '/columns/' + columnId + '/tasks', data, { responseType: 'json' });
   }
 

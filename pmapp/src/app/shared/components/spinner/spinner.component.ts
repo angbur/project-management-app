@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
@@ -8,10 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SpinnerComponent {
   constructor() {}
 
-  @Input() value: number = 100;
+  @Input() value: number = 50;
   @Input() diameter: number = 100;
-  @Input() mode: string = 'indeterminate';
+  @Input() mode: ProgressSpinnerMode= 'indeterminate';
   @Input() strokeWidth: number = 10;
-  @Input() overlay: boolean = false;
-  @Input() color: string = 'primary';
 }

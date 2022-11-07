@@ -1,3 +1,4 @@
+import { requestStatus } from './../../types';
 import { on } from '@ngrx/store';
 import { createReducer } from '@ngrx/store';
 import * as SystemActions from './system.actions';
@@ -26,6 +27,7 @@ export interface SystemState {
   token: token;
   isLoggedIn: boolean;
   userId: string | null;
+  status: requestStatus;
   error: Error | null;
 }
 
@@ -33,30 +35,40 @@ export const initialState: SystemState = {
   token: null,
   isLoggedIn: false,
   userId: null,
+  status: 'idle',
   error: null,
 };
 
 export const systemReducers = createReducer(
   initialState,
+  on(SystemActions.setInitialToken, (state, { token }) => ({
+    ...state,
+    token: token,
+    isLoggedIn: true,
+  })),
   on(SystemActions.login, (state, { data }) => ({
     ...state,
     data: data,
+    status: 'loading...',
   })),
   on(SystemActions.loginSuccess, (state, { user }) => ({
     ...state,
     token: user.token,
     userId: user.id,
     isLoggedIn: true,
+    status: 'succeeded (:',
   })),
   on(SystemActions.loginError, (state, { error }) => ({
     ...state,
     error: error,
     isLoggedIn: false,
+    status: 'failed :(',
   })),
   on(SystemActions.logout, state => ({
     ...state,
     token: null,
     isLoggedIn: false,
+    status: 'idle',
   })),
   on(SystemActions.register, state => ({ ...state })),
   on(SystemActions.registerError, (state, { error }) => ({

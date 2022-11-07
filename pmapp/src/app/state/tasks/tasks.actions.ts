@@ -1,4 +1,4 @@
-import { TaskSet } from './../../_services/tasks/task.model';
+import { TaskSet, NewTask } from './../../_services/tasks/task.model';
 import { createAction, props } from '@ngrx/store';
 import { Task } from 'src/app/_services/tasks/task.model';
 
@@ -8,11 +8,11 @@ export const tasksLoaded = createAction('[Tasks] Data Loaded', props<{ tasks: Ta
 
 export const tasksLoadedError = createAction('[Tasks] Loaded Error', props<{ error: Error }>());
 
-export const addTask = createAction('[Tasks] Add Data');
+export const addTask = createAction('[Tasks] Add Data',  props<{ task: NewTask, colId: string }>());
 
-export const taskAdded = createAction('[Tasks] Data Added', props<{ tasks: Task }>());
+export const taskAdded = createAction('[Tasks] Data Added', props<{ task: Task }>());
 
-export const taskAddedError = createAction('[Tasks] Error Added', props<{ error: string }>());
+export const taskAddedError = createAction('[Tasks] Error Added', props<{ error: Error }>());
 
 export const deleteTask = createAction('[Tasks] Delete Data');
 

@@ -7,7 +7,7 @@ export const columnsLoaded = createAction('[Columns] Data Loaded', props<{ colum
 
 export const columnsLoadedError = createAction('[Columns] Loaded Error', props<{ error: Error }>());
 
-export const addColumn = createAction('[Columns] Add Data');
+export const addColumn = createAction('[Columns] Add Data', props<{ column: Column }>());
 
 export const columnAdded = createAction('[Columns] Data Added', props<{ column: Column }>());
 

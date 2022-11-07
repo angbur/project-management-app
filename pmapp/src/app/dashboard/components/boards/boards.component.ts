@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { BoardsState } from 'src/app/state/boards/boards.reducer';
+import { BoardsState, getBoardsStatus } from 'src/app/state/boards/boards.reducer';
 import { Component, Input } from '@angular/core';
 import { Board } from 'src/app/_services/board/board.model';
 import { Store } from '@ngrx/store';
@@ -14,8 +15,11 @@ export class BoardsComponent {
   @Input()
   boards: Board[] | null = null;
   selectedBoard: Board | undefined = undefined;
+  status: Observable<string>;
 
-  constructor(private readonly store: Store<BoardsState>, private router: Router) {}
+  constructor(private readonly store: Store<BoardsState>, private router: Router) {
+    this.status = this.store.select(getBoardsStatus);
+  }
 
   deleteBoard(boardId: string | undefined): void {
     if (boardId !== undefined) {

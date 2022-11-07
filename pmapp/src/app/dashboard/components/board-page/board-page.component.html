@@ -1,10 +1,12 @@
-<div class="board-container">
+<div class="toolbar">
   <h2>Project title</h2>
+  <button class="button add-new-column-button" type="button" (click)="addNewColumn()">
+    <img src="assets/icons/plus.svg" alt="" />
+    <h4>Add column</h4>
+  </button>
+</div>
+<div class="board-container">
   <div class="column-row">
-    <div class="empty-column">
-      <img src="assets/icons/plus.svg" alt="" />
-      <h4>Add column</h4>
-    </div>
     <app-column [columns]="columns$ | async" [tasks]="tasks$ | async"> </app-column>
   </div>
 </div>

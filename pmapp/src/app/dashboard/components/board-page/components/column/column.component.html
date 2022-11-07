@@ -10,10 +10,10 @@
     </div>
     <div class="column-container">
       <ul class="column-content">
-        <li class="empty-task-item">
+        <button class="empty-task-item" type="button" (click)="addNewTask(columns ? columns[i]._id.toString() : '', i)">
           <img src="assets/icons/plus-white.svg" />
           Add task
-        </li>
+        </button>
         <li class="task-item" cdkDrag *ngFor="let task of tasksEntities[i].tasks">
           {{ task.title }}
           <span class="task-menu">

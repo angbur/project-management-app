@@ -18,7 +18,7 @@ export class BoardsEffects {
     this.actions$.pipe(
       ofType(BoardsActions.loadBoards),
       withLatestFrom(this.store.select(selectUserId)),
-      mergeMap(([action, userId]) =>
+      mergeMap(([, userId]) =>
         this.BoardsService.getAllBoardsForUser(userId as string).pipe(
           map((boards: Board[]) => BoardsActions.boardsLoaded({ boards })),
           catchError(() => of({ type: '[Boards] Loaded Error' }))

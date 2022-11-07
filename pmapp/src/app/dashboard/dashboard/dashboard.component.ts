@@ -12,15 +12,16 @@ import { Board } from 'src/app/_services/board/board.model';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  boards$: Observable<Board[]>;
+  boards$: Observable<Board[] | null>;
 
-  constructor(private readonly store: Store<BoardsState>) {
+  constructor(
+    private readonly store: Store<BoardsState>) {
     this.boards$ = this.store.pipe(select(selectAllBoards));
-  }
+  };
 
   ngOnInit(): void {
     this.getBoards();
-  }
+  };
 
   getBoards() {
     this.store.dispatch(loadBoards());
@@ -28,5 +29,5 @@ export class DashboardComponent implements OnInit {
 
   updateBoard(board: Board) {
     this.store.dispatch(updateBoard({ board: board }));
-  }
-}
+  };
+};
