@@ -23,3 +23,4 @@ export const columnsReducers = createReducer(
 );
 
 export const getColumns = (state: ColumnsState) => state.columns;
+export const getColumnsLength = (state: ColumnsState) => state.columns.length;

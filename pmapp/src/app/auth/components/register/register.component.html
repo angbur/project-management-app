@@ -4,7 +4,7 @@
     <form class="form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div *ngIf="errorMessage">
         <div class="alert alert-danger" role="alert">
-          {{ errorMessage }}
+          {{ errorMessage | async }}
         </div>
       </div>
       <input type="text" name="name" [(ngModel)]="form.name" required #name="ngModel" placeholder="Your name" />

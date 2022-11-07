@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { register } from 'src/app/state/system/system.actions';
 import { getSystemError, SystemState } from 'src/app/state/system/system.reducer';
 
@@ -10,24 +10,24 @@ import { getSystemError, SystemState } from 'src/app/state/system/system.reducer
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  errorMessage: Error | null = null;
+  errorMessage: Observable<Error | null>;
   form: RegisterForm = {
     name: '',
     login: '',
     password: '',
   };
 
-  constructor(private readonly store: Store<SystemState>, private router: Router) {
-    this.store.pipe(select(getSystemError)).subscribe(error => (this.errorMessage = error));
-  }
+  constructor(private readonly store: Store<SystemState>) {
+    this.errorMessage = this.store.pipe(select(getSystemError));
+  };
 
   onSubmit(): void {
     this.store.dispatch(register({ data: this.form }));
-  }
-}
+  };
+};
 
 interface RegisterForm {
   name: string;
   login: string;
   password: string;
-}
+};

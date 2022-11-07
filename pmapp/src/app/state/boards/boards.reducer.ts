@@ -3,7 +3,7 @@ import { requestStatus } from 'src/app/types';
 import { Board } from '../../_services/board/board.model';
 import * as BoardsActions from './boards.actions';
 
-const createBoard = (boards: Board[] | null, board: Board) => [...boards as Board[], board];
+const createBoard = (boards: Board[] | null, board: Board) => boards ? [ ...boards, board] : [board];
 const updateBoard = (boards: Board[], board: Board) =>
   boards.map(p => {
     return p._id === board._id ? Object.assign({}, board) : p;
@@ -58,7 +58,7 @@ export const boardsReducers = createReducer(
     selectedBoardId: state.selectedBoardId,
     boards: updateBoard(state.boards as Board[], board),
   })),
-  on(BoardsActions.deleteBoard, (state, { boardId }) => ({
+  on(BoardsActions.boardDeleted, (state, { boardId }) => ({
     ...state,
     selectedBoardId: state.selectedBoardId,
     boards: deleteBoard(state.boards as Board[], boardId),

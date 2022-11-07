@@ -12,6 +12,7 @@ import { NewTask, Task } from 'src/app/_services/tasks/task.model';
 import { TasksService } from 'src/app/_services/tasks/tasks.service';
 import { getActualBoardId, selectUserId } from './../index';
 import { SystemState } from '../system/system.reducer';
+import { isString } from '../type.guard';
 
 @Injectable()
 export class TasksEffects {
@@ -123,6 +124,3 @@ const setUserId = (task: NewTask, id: string) => {
   return newTask;
 };
 
-function isString (value: string | null): value is string {
-  return (value as string) !== null ;
-};

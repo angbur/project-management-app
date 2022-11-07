@@ -31,7 +31,7 @@ export class BoardsEffects {
     this.actions$.pipe(
       ofType(BoardsActions.addBoard),
       mergeMap((data: any) =>
-        this.BoardsService.createBoard(data.payload).pipe(
+        this.BoardsService.createBoard(data.board).pipe(
           map(() => BoardsActions.boardAdded()),
           catchError((error: Error) => of(BoardsActions.boardAddedError({ error })))
         )
@@ -61,16 +61,16 @@ export class BoardsEffects {
     { dispatch: false }
   );
 
-  /*  deleteBoard$ = createEffect(() => this.actions$.pipe(
+  deleteBoard$ = createEffect(() => this.actions$.pipe(
     ofType(BoardsActions.deleteBoard),
-    mergeMap((boardId: string) =>
-    this.BoardsService.deleteBoardById(boardId)
+    mergeMap((data) =>
+    this.BoardsService.deleteBoardById(data.boardId)
     .pipe(
-      map((data: Board) => BoardsActions.boardDeleted()),
+      map((board) => BoardsActions.boardDeleted({ boardId: board._id })),
       catchError((error) => of( BoardsActions.boardDeletedError({error}))),
     )
     )
-  )); */
+  ));
 
   goToDashboardPage(): void {
     this.router.navigate(['/dashboard']);

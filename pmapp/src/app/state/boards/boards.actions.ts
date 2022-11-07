@@ -21,6 +21,6 @@ export const boardUpdated = createAction('[Boards] Data Updated');
 
 export const deleteBoard = createAction('[Boards] Delete Data', props<{ boardId: string }>());
 
-export const boardDeleted = createAction('[Boards] Board Deleted');
+export const boardDeleted = createAction('[Boards] Delete Data', props<{ boardId: string }>());
 
 export const boardDeletedError = createAction('[Boards] Deleted Error', props<{ error: Error }>());

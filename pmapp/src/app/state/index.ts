@@ -40,6 +40,8 @@ export const selectColumnsState = createFeatureSelector<fromColumns.ColumnsState
 
 export const getActualColumnsList = createSelector(selectColumnsState, fromColumns.getColumns);
 
+export const getOrderToNewColumn = createSelector(selectColumnsState, fromColumns.getColumnsLength);
+
 export const selectTasksState = createFeatureSelector<fromTasks.TasksState>('tasks');
 
 export const getActualTasksList = createSelector(selectTasksState, fromTasks.getTasks);

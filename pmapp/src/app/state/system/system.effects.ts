@@ -52,11 +52,7 @@ export class SystemEffects {
     this.actions$.pipe(
       ofType(SystemActions.register),
       mergeMap((data: any) => {
-        return this.AuthService.register({
-          name: data.payload.name,
-          login: data.payload.login,
-          password: data.payload.password,
-        }).pipe(
+        return this.AuthService.register(data.data).pipe(
           map(() => SystemActions.registerSuccess()),
           catchError(error => of(SystemActions.registerError({ error })))
         );
