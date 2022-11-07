@@ -1,15 +1,15 @@
-import { selectUserId } from './../index';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
-
-import { BoardsService } from '../../_services/board/boards.service';
-import { SystemState } from '../system/system.reducer';
-import { Board } from 'src/app/_services/board/board.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+
+import { BoardsService } from 'src/app/_services/board/boards.service';
+import { SystemState } from '../system/system.reducer';
+import { selectUserId } from './../index';
+import { Board } from 'src/app/_services/board/board.model';
 import * as BoardsActions from './boards.actions';
 
 @Injectable({ providedIn: 'root' })

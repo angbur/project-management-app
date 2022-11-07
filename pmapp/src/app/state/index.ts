@@ -36,6 +36,8 @@ export const selectUserState = createFeatureSelector<fromUser.UserState>('user')
 
 export const getActualBoardId = createSelector(selectBoardState, fromBoards.getSelectedBoardId);
 
+export const getActualBoardTitle = createSelector(selectBoardState, fromBoards.getSelectBoardTitle);
+
 export const selectColumnsState = createFeatureSelector<fromColumns.ColumnsState>('columns');
 
 export const getActualColumnsList = createSelector(selectColumnsState, fromColumns.getColumns);

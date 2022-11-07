@@ -26,7 +26,7 @@ export class NewBoardComponent {
     private router: Router
   ) {
     this.owner$ = this.systemStore.select(selectUserId);
-  }
+  };
 
   onSubmit(): void {
     const newBoard: Board = {
@@ -40,9 +40,9 @@ export class NewBoardComponent {
       }
     });
     this.store.dispatch(addBoard({ board: newBoard }));
-  }
+  };
 
   handleClick(): void {
     this.router.navigate(['/dashboard']);
   }
-}
+};
