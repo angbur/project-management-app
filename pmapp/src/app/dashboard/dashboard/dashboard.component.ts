@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectAllBoards } from 'src/app/state';
+import { selectActualBoardsStatus, selectAllBoards } from 'src/app/state';
 import { loadBoards, updateBoard } from 'src/app/state/boards/boards.actions';
 import { BoardsState } from 'src/app/state/boards/boards.reducer';
 import { Board } from 'src/app/_services/board/board.model';
@@ -13,15 +13,16 @@ import { Board } from 'src/app/_services/board/board.model';
 })
 export class DashboardComponent implements OnInit {
   boards$: Observable<Board[] | null>;
+  statusBoards$: Observable<string>;
 
-  constructor(
-    private readonly store: Store<BoardsState>) {
+  constructor(private readonly store: Store<BoardsState>) {
     this.boards$ = this.store.pipe(select(selectAllBoards));
-  };
+    this.statusBoards$ = this.store.pipe(select(selectActualBoardsStatus));
+  }
 
   ngOnInit(): void {
     this.getBoards();
-  };
+  }
 
   getBoards() {
     this.store.dispatch(loadBoards());
@@ -29,5 +30,5 @@ export class DashboardComponent implements OnInit {
 
   updateBoard(board: Board) {
     this.store.dispatch(updateBoard({ board: board }));
-  };
-};
+  }
+}

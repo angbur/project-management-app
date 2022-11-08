@@ -44,18 +44,17 @@ export class TasksEffects {
   addTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.addTask),
-      withLatestFrom(this.boardStore.select(getActualBoardId),
-        this.systemStore.select(selectUserId)),
+      withLatestFrom(this.boardStore.select(getActualBoardId), this.systemStore.select(selectUserId)),
       mergeMap(([action, boardId, userId]) =>
-        this.TasksService.createTaskInColumn(setUserId(action.task,
-        isString(userId) ? userId : ''),
-        isString(boardId) ? boardId : '',
-        action.colId)
-        .pipe(
-        map((data) => TasksActions.taskAdded({task: data as Task})),
-        catchError(error => of(TasksActions.taskAddedError({ error })))
+        this.TasksService.createTaskInColumn(
+          setUserId(action.task, isString(userId) ? userId : ''),
+          isString(boardId) ? boardId : '',
+          action.colId
+        ).pipe(
+          map(data => TasksActions.taskAdded({ task: data as Task })),
+          catchError(error => of(TasksActions.taskAddedError({ error })))
+        )
       )
-    )
     )
   );
 
@@ -64,7 +63,7 @@ export class TasksEffects {
       this.actions$.pipe(
         ofType(TasksActions.taskAdded),
         tap(() => {
-         this.toastr.success('Task added!');
+          this.toastr.success('Task added!');
         })
       ),
     { dispatch: false }
@@ -81,32 +80,36 @@ export class TasksEffects {
     { dispatch: false }
   );
 
-  deleteTask$ = createEffect(()=>
+  deleteTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.deleteTask),
       withLatestFrom(this.boardStore.select(getActualBoardId)),
-    mergeMap(([action, boardId]) =>
-      this.TasksService.deleteTaskById(isString(boardId) ? boardId : '', action.colId, action.taskId)
-      .pipe(
-      map((data) => TasksActions.taskDeleted({task: data as Task})),
-      catchError(error => of(TasksActions.taskDeletedError({ error })))
+      mergeMap(([action, boardId]) =>
+        this.TasksService.deleteTaskById(isString(boardId) ? boardId : '', action.colId, action.taskId).pipe(
+          map(data => TasksActions.taskDeleted({ task: data as Task })),
+          catchError(error => of(TasksActions.taskDeletedError({ error })))
+        )
       )
-    )
     )
   );
 
-  updateTask$ = createEffect(()=>
+  updateTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.updateTask),
       withLatestFrom(this.boardStore.select(getActualBoardId)),
       mergeMap(([action, boardId]) =>
-      this.TasksService.updateTaskById(action.task, isString(boardId) ? boardId : '', action.colId, action.taskId )
-      .pipe(
-      map((data) => TasksActions.taskUpdated({task: data as Task})),
-      catchError(error => of(TasksActions.taskUpdatedError({ error })))
-      ))
+        this.TasksService.updateTaskById(
+          action.task,
+          isString(boardId) ? boardId : '',
+          action.colId,
+          action.taskId
+        ).pipe(
+          map(data => TasksActions.taskUpdated({ task: data as Task })),
+          catchError(error => of(TasksActions.taskUpdatedError({ error })))
+        )
+      )
     )
-  )
+  );
 
   constructor(
     private actions$: Actions,
@@ -116,11 +119,10 @@ export class TasksEffects {
     private readonly systemStore: Store<SystemState>,
     private toastr: ToastrService
   ) {}
-};
+}
 
 const setUserId = (task: NewTask, id: string) => {
   const newTask = Object.assign({}, task);
   newTask.userId = id;
   return newTask;
 };
-

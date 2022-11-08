@@ -14,9 +14,11 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard],
   },
-  { path: 'profile',
+  {
+    path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
-    canActivate: [AuthGuard] },
+    canActivate: [AuthGuard],
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

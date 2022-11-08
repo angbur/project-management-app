@@ -30,10 +30,10 @@ export class ColumnComponent implements OnChanges {
     order: 0,
     description: 'some description',
     userId: '',
-    users: []
+    users: [],
   };
 
-  constructor( private readonly store: Store<TaskState>, public dialog: MatDialog ) {}
+  constructor(private readonly store: Store<TaskState>, public dialog: MatDialog) {}
 
   ngOnChanges(): void {
     if (isColumns(this.columns) && isTasks(this.tasks)) {
@@ -53,7 +53,7 @@ export class ColumnComponent implements OnChanges {
         this.tasksEntities[colId].tasks.sort((a, b) => a.order - b.order);
       }
     }
-  };
+  }
 
   dropTask(event: CdkDragDrop<Task[]>) {
     const previousColumnIndex: number = getNumberOfColumn(event.previousContainer.id);
@@ -65,34 +65,34 @@ export class ColumnComponent implements OnChanges {
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       this.setNewTasksSetInColumn(previousColumnIndex, newColumnIndex);
-    };
-  };
+    }
+  }
 
   setNewTasksSetInColumn(prevId: number, newId: number) {
     this.setNewOrderForTasks(prevId);
     this.setNewColumnId(newId);
     this.setNewOrderForTasks(newId);
     this.updateNewTasks(this.tasksEntities);
-  };
+  }
 
   setNewOrderForTasks(id: number) {
-    if(this.tasksEntities[id]){
+    if (this.tasksEntities[id]) {
       let arr = Array.from(this.tasksEntities[id].tasks);
-    let newTasksList: Task[] = [];
+      let newTasksList: Task[] = [];
 
-    for (let i = 0; i < arr.length; i += 1) {
-      const newTask: Task = Object.assign({}, arr[i]);
-      newTask.order = i;
-      newTasksList.push(newTask);
-    };
+      for (let i = 0; i < arr.length; i += 1) {
+        const newTask: Task = Object.assign({}, arr[i]);
+        newTask.order = i;
+        newTasksList.push(newTask);
+      }
 
-    newTasksList.sort((a, b) => a.order - b.order);
-    this.tasksEntities[id].tasks = newTasksList;
-    };
-  };
+      newTasksList.sort((a, b) => a.order - b.order);
+      this.tasksEntities[id].tasks = newTasksList;
+    }
+  }
 
   setNewColumnId(colId: number) {
-    if(this.tasksEntities[colId]){
+    if (this.tasksEntities[colId]) {
       let arr = Array.from(this.tasksEntities[colId].tasks);
       let newTasksList: Task[] = [];
 
@@ -101,11 +101,11 @@ export class ColumnComponent implements OnChanges {
           const newTask: Task = Object.assign({}, arr[i]);
           newTask.columnId = this.columns[colId]._id;
           newTasksList.push(newTask);
-        };
-      };
+        }
+      }
       this.tasksEntities[colId].tasks = newTasksList;
-    };
-  };
+    }
+  }
 
   updateNewTasks(tasksEntities: TasksEntities) {
     let newTasks: Task[] = [];
@@ -121,9 +121,9 @@ export class ColumnComponent implements OnChanges {
     }
 
     this.store.dispatch(updateTasksSet({ tasks: taskSetData }));
-  };
+  }
 
-  addNewTask(colId: string, colNumber: number){
+  addNewTask(colId: string, colNumber: number) {
     const dialogRef = this.dialog.open(NewTaskModalComponent, {
       width: '250px',
       data: this.newTask.title,
@@ -134,16 +134,16 @@ export class ColumnComponent implements OnChanges {
       const task = Object.assign({}, this.newTask);
       task.order = JSON.parse(JSON.stringify(newOrder));
       task.title = JSON.parse(JSON.stringify(result));
-      if (result) this.store.dispatch(addTask({task: task, colId: colId}));
+      if (result) this.store.dispatch(addTask({ task: task, colId: colId }));
     });
-  };
+  }
 
   delete(colId: string, taskId: string) {
-    this.store.dispatch(deleteTask({colId: colId, taskId: taskId}));
-  };
+    this.store.dispatch(deleteTask({ colId: colId, taskId: taskId }));
+  }
 
   update(colId: string, task: Task, taskId: string) {
-    const {_id, boardId, ...rest} = task;
+    const { _id, boardId, ...rest } = task;
     const updatedTask: NewTask = Object.assign({}, rest);
     const dialogRef = this.dialog.open(UpdateTaskModalComponent, {
       width: '250px',
@@ -152,11 +152,7 @@ export class ColumnComponent implements OnChanges {
 
     dialogRef.afterClosed().subscribe(result => {
       updatedTask.title = JSON.parse(JSON.stringify(result));
-      if (result) this.store.dispatch(updateTask({task: updatedTask, colId: colId, taskId: taskId}));
+      if (result) this.store.dispatch(updateTask({ task: updatedTask, colId: colId, taskId: taskId }));
     });
-
-  };
-
-};
-
-
+  }
+}

@@ -3,14 +3,12 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromBoards from './boards/boards.reducer';
 import * as fromColumns from './columns/columns.reducer';
 import * as fromSystem from './system/system.reducer';
-import * as fromUser from './user/user.reducer';
 import * as fromTasks from './tasks/tasks.reducer';
 
 export interface AppState {
   boards: fromBoards.BoardsState;
   columns: fromColumns.ColumnsState;
   system: fromSystem.SystemState;
-  user: fromUser.UserState;
   tasks: fromTasks.TasksState;
 }
 
@@ -18,7 +16,6 @@ export const reducers = {
   boards: fromBoards.boardsReducers,
   system: fromSystem.systemReducers,
   columns: fromColumns.columnsReducers,
-  user: fromUser.userReducers,
   tasks: fromTasks.tasksReducers,
 };
 
@@ -32,11 +29,11 @@ export const selectUserId = createSelector(selectSystemState, fromSystem.getUser
 
 export const selectLoginStatus = createSelector(selectSystemState, fromSystem.getSystemStatus);
 
-export const selectUserState = createFeatureSelector<fromUser.UserState>('user');
-
 export const getActualBoardId = createSelector(selectBoardState, fromBoards.getSelectedBoardId);
 
 export const getActualBoardTitle = createSelector(selectBoardState, fromBoards.getSelectBoardTitle);
+
+export const selectActualBoardsStatus = createSelector(selectBoardState, fromBoards.getBoardsStatus);
 
 export const selectColumnsState = createFeatureSelector<fromColumns.ColumnsState>('columns');
 

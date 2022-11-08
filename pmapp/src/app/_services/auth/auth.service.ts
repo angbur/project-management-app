@@ -16,30 +16,29 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient,
-    private readonly store: Store<SystemState>) {}
+  constructor(private http: HttpClient, private readonly store: Store<SystemState>) {}
 
   login(loginData: AuthenticationData): Observable<Object> {
     return this.http.post(API + 'signin', loginData, httpOptions);
-  };
+  }
 
   logout(): void {
     sessionStorage.removeItem('token');
-  };
+  }
 
   register(registerData: AuthorizationData): Observable<any> {
     return this.http.post(API + 'signup', registerData, httpOptions);
-  };
+  }
 
   isAuthenticated(): Observable<boolean> {
     return this.store.select(selectLoginStatus);
-  };
+  }
 
   getToken(): Observable<string | null> {
-    return of(sessionStorage.getItem('token') ? sessionStorage.getItem('token') : null)
-  };
+    return of(sessionStorage.getItem('token') ? sessionStorage.getItem('token') : null);
+  }
 
   setToken(token: string): void {
     sessionStorage.setItem('token', token);
-  };
-};
+  }
+}

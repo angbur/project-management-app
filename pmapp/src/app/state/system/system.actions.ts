@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { UserData } from 'src/app/_services/user/user.model';
 import { AuthenticationData, AuthorizationData } from './system.reducer';
 
-export const setInitialToken = createAction('[System] Set Initial Token', props<{ token: string | null}>());
+export const setInitialToken = createAction('[System] Set Initial Token', props<{ token: string | null }>());
 
 export const login = createAction('[System] Log in User', props<{ data: AuthenticationData }>());
 

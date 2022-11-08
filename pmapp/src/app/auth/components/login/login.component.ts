@@ -19,28 +19,25 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(
-    private readonly store: Store<SystemState>,
-    private router: Router,
-    private authService: AuthService) {
+  constructor(private readonly store: Store<SystemState>, private router: Router, private authService: AuthService) {
     this.isLoggedIn = this.store.pipe(select(getSystemStatus));
     this.errorCode$ = this.store.pipe(select(getSystemError));
-  };
+  }
 
   ngOnInit(): void {
     this.authService.getToken().subscribe((token: string | null) => {
-      this.store.dispatch(setInitialToken({token: token as string}))
+      this.store.dispatch(setInitialToken({ token: token as string }));
     });
-  };
+  }
 
   onSubmit(): void {
     this.store.dispatch(login({ data: this.form }));
-  };
+  }
 
   gotoDashboard(): void {
     this.router.navigate(['/dashboard']);
-  };
-};
+  }
+}
 
 interface LoginForm {
   login: string;

@@ -15,11 +15,8 @@ export class BoardsComponent {
   @Input()
   boards: Board[] | null = null;
   selectedBoard: Board | undefined = undefined;
-  status: Observable<string>;
 
-  constructor(private readonly store: Store<BoardsState>, private router: Router) {
-    this.status = this.store.select(getBoardsStatus);
-  }
+  constructor(private readonly store: Store<BoardsState>, private router: Router) {}
 
   deleteBoard(boardId: string | undefined): void {
     if (boardId !== undefined) {

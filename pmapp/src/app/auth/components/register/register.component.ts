@@ -19,15 +19,15 @@ export class RegisterComponent {
 
   constructor(private readonly store: Store<SystemState>) {
     this.errorMessage = this.store.pipe(select(getSystemError));
-  };
+  }
 
   onSubmit(): void {
     this.store.dispatch(register({ data: this.form }));
-  };
-};
+  }
+}
 
 interface RegisterForm {
   name: string;
   login: string;
   password: string;
-};
+}

@@ -61,16 +61,17 @@ export class BoardsEffects {
     { dispatch: false }
   );
 
-  deleteBoard$ = createEffect(() => this.actions$.pipe(
-    ofType(BoardsActions.deleteBoard),
-    mergeMap((data) =>
-    this.BoardsService.deleteBoardById(data.boardId)
-    .pipe(
-      map((board) => BoardsActions.boardDeleted({ boardId: board._id })),
-      catchError((error) => of( BoardsActions.boardDeletedError({error}))),
+  deleteBoard$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BoardsActions.deleteBoard),
+      mergeMap(data =>
+        this.BoardsService.deleteBoardById(data.boardId).pipe(
+          map(board => BoardsActions.boardDeleted({ boardId: board._id })),
+          catchError(error => of(BoardsActions.boardDeletedError({ error })))
+        )
+      )
     )
-    )
-  ));
+  );
 
   goToDashboardPage(): void {
     this.router.navigate(['/dashboard']);

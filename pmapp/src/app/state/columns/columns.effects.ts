@@ -20,26 +20,30 @@ export class ColumnsEffects {
       withLatestFrom(this.boardStore.select(getActualBoardId)),
       mergeMap(([, boardId]) =>
         this.ColumnsService.getColumnsInBoard(isString(boardId) ? boardId : '').pipe(
-          map((columns: any) => (ColumnsActions.columnsLoaded({columns: columns as Column[] })),
-          catchError((error) => of(ColumnsActions.columnsLoadedError({error})))
+          map(
+            (columns: any) => ColumnsActions.columnsLoaded({ columns: columns as Column[] }),
+            catchError(error => of(ColumnsActions.columnsLoadedError({ error })))
+          )
         )
       )
     )
-  ));
+  );
 
   addColumn$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(ColumnsActions.addColumn),
-    withLatestFrom(this.boardStore.select(getActualBoardId), this.columnStore.select(getOrderToNewColumn)),
-      mergeMap(([action,boardId, order]) =>
-      this.ColumnsService.createColumnInBoard({title: action.column.title, order: order},
-        isString(boardId) ? boardId : '').pipe(
-        map((data) => ColumnsActions.columnAdded({column: data as Column})),
-        catchError(error => of(ColumnsActions.columnAddedError({ error })))
+    this.actions$.pipe(
+      ofType(ColumnsActions.addColumn),
+      withLatestFrom(this.boardStore.select(getActualBoardId), this.columnStore.select(getOrderToNewColumn)),
+      mergeMap(([action, boardId, order]) =>
+        this.ColumnsService.createColumnInBoard(
+          { title: action.column.title, order: order },
+          isString(boardId) ? boardId : ''
+        ).pipe(
+          map(data => ColumnsActions.columnAdded({ column: data as Column })),
+          catchError(error => of(ColumnsActions.columnAddedError({ error })))
+        )
       )
     )
-  )
-);
+  );
 
   constructor(
     private actions$: Actions,
@@ -48,4 +52,3 @@ export class ColumnsEffects {
     private readonly boardStore: Store<BoardsState>
   ) {}
 }
-

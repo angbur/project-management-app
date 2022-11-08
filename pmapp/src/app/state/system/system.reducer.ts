@@ -70,13 +70,13 @@ export const systemReducers = createReducer(
     isLoggedIn: false,
     status: 'idle',
   })),
-  on(SystemActions.register, state => ({ ...state, status: 'loading...',  })),
+  on(SystemActions.register, state => ({ ...state, status: 'loading...' })),
   on(SystemActions.registerError, (state, { error }) => ({
     ...state,
     status: 'failed :(',
     error: error,
   })),
-  on(SystemActions.registerSuccess, state => ({...state, status: 'succeeded (:'}))
+  on(SystemActions.registerSuccess, state => ({ ...state, status: 'succeeded (:' }))
 );
 
 export const getAuthenticationData = (state: SystemState) => state.data;
