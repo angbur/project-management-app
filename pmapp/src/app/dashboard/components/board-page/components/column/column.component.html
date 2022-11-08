@@ -2,6 +2,7 @@
   <div
     class="column"
     *ngFor="let column of columns; index as i"
+    [attr.data-colorder]="column.order"
     cdkDropList
     [cdkDropListData]="tasksEntities[i].tasks"
     (cdkDropListDropped)="dropTask($event)">

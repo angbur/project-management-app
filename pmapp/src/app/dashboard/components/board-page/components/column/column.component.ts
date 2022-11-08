@@ -9,7 +9,6 @@ import { Column } from 'src/app/_services/columns/column.model';
 import { Task, TasksEntities } from 'src/app/_services/tasks/task.model';
 import { NewTaskModalComponent } from '../new-task-modal/new-task-modal.component';
 import { isColumns, isTasks } from './type.guard';
-import { getNumberOfColumn } from './getNumbersOfColumns';
 import { addTask, deleteTask, updateTasksSet } from 'src/app/state/tasks/tasks.actions';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 
@@ -56,8 +55,10 @@ export class ColumnComponent implements OnChanges {
   }
 
   dropTask(event: CdkDragDrop<Task[]>) {
-    const previousColumnIndex: number = getNumberOfColumn(event.previousContainer.id);
-    const newColumnIndex: number = getNumberOfColumn(event.container.id);
+    const previousColumnIndex: number = parseInt(
+      event.previousContainer.element.nativeElement.dataset['colorder'] as string
+    );
+    const newColumnIndex: number = parseInt(event.container.element.nativeElement.dataset['colorder'] as string);
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -104,7 +105,7 @@ export class ColumnComponent implements OnChanges {
         }
       }
       this.tasksEntities[colId].tasks = newTasksList;
-    }
+    } else console.log(this.tasksEntities, colId);
   }
 
   updateNewTasks(tasksEntities: TasksEntities) {
