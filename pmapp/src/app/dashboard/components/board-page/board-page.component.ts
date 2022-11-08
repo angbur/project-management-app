@@ -1,21 +1,18 @@
-import {
-  getActualColumnsList,
-  getActualTasksList,
-  getActualBoardId,
-  getActualBoardTitle,
-} from './../../../state/index';
+import { getActualColumnsList, getActualTasksList, getActualBoardTitle } from './../../../state/index';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { loadColumns } from 'src/app/state/columns/columns.actions';
+import { clearColumns, loadColumns } from 'src/app/state/columns/columns.actions';
 import { ColumnsState } from 'src/app/state/columns/columns.reducer';
 import { Column } from 'src/app/_services/columns/column.model';
-import { loadTasks } from 'src/app/state/tasks/tasks.actions';
+import { clearTasks, loadTasks } from 'src/app/state/tasks/tasks.actions';
 import { Task } from 'src/app/_services/tasks/task.model';
 import { MatDialog } from '@angular/material/dialog';
 import { BoardsState } from 'src/app/state/boards/boards.reducer';
 import { addColumn } from './../../../state/columns/columns.actions';
 import { NewColumnModalComponent } from './components/new-column-modal/new-column-modal.component';
+import { Router } from '@angular/router';
+import { clearSelectedBoards } from 'src/app/state/boards/boards.actions';
 
 @Component({
   selector: 'app-board-page',
@@ -30,6 +27,8 @@ export class BoardPageComponent implements OnInit {
   constructor(
     private readonly columnsStore: Store<ColumnsState>,
     private readonly boardStore: Store<BoardsState>,
+    private readonly tasksStore: Store<TaskState>,
+    private router: Router,
     public dialog: MatDialog
   ) {
     this.columns$ = columnsStore.pipe(select(getActualColumnsList));
@@ -61,4 +60,11 @@ export class BoardPageComponent implements OnInit {
   }
 
   editProjectTitle() {}
+
+  showAllProjects() {
+    this.boardStore.dispatch(clearSelectedBoards());
+    this.columnsStore.dispatch(clearColumns());
+    this.tasksStore.dispatch(clearTasks());
+    this.router.navigate(['/dashboard']);
+  }
 }

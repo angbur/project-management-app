@@ -42,7 +42,10 @@ button.add-new-column-button {
   margin-left: 2rem;
   justify-content: space-between;
   align-items: center;
-    &>h2 {
+    h2 {
       margin: 2rem;
+    }
+    &>.backIcon {
+      height: 26px;
     }
 }

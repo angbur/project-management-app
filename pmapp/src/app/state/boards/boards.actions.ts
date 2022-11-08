@@ -24,3 +24,5 @@ export const deleteBoard = createAction('[Boards] Delete Data', props<{ boardId:
 export const boardDeleted = createAction('[Boards] Delete Data', props<{ boardId: string }>());
 
 export const boardDeletedError = createAction('[Boards] Deleted Error', props<{ error: Error }>());
+
+export const clearSelectedBoards = createAction('[Boards] Clear Selected Board');

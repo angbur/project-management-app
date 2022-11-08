@@ -62,6 +62,10 @@ export const boardsReducers = createReducer(
     ...state,
     selectedBoardId: state.selectedBoardId,
     boards: deleteBoard(state.boards as Board[], boardId),
+  })),
+  on(BoardsActions.clearSelectedBoards, state => ({
+    ...state,
+    selectedBoardId: null,
   }))
 );
 

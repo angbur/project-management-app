@@ -30,7 +30,11 @@ export const tasksReducers = createReducer(
   on(TasksActions.deleteTask, state => ({ ...state, tasks: state.tasks })),
   on(TasksActions.taskDeleted, (state, { task }) => ({ ...state, tasks: deleteTask(state.tasks, task) })),
   on(TasksActions.taskDeletedError, (state, { error }) => ({ ...state, error: error })),
-  on(TasksActions.taskUpdated, (state, { task }) => ({ ...state, tasks: updateTask(state.tasks, task) }))
+  on(TasksActions.taskUpdated, (state, { task }) => ({ ...state, tasks: updateTask(state.tasks, task) })),
+  on(TasksActions.clearTasks, state => ({
+    tasks: initialState.tasks,
+    error: initialState.error,
+  }))
 );
 
 export const getTasks = (state: TasksState) => state.tasks;

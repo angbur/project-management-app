@@ -1,5 +1,10 @@
 <div class="toolbar">
-  <h2>{{ projectTitle$ | async }}</h2>
+  <div class="row">
+    <button class="button" type="button" (click)="showAllProjects()">
+      <img src="assets/icons/arrow-left-solid.svg" alt="" />
+    </button>
+    <h2>{{ projectTitle$ | async }}</h2>
+  </div>
   <div class="row">
     <button class="button add-new-column-button" type="button" (click)="editProjectTitle()">
       <img src="assets/icons/pen-solid.svg" alt="" />

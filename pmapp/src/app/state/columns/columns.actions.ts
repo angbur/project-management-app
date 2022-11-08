@@ -18,3 +18,5 @@ export const deleteColumn = createAction('[Columns] Delete Data');
 export const ColumnDeleted = createAction('[Columns] Column Deleted]');
 
 export const ColumnDeletedError = createAction('[Columns] Error Delete');
+
+export const clearColumns = createAction('[Columns] Clear Data');

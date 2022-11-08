@@ -34,3 +34,5 @@ export const updateTasksSet = createAction('[Tasks] Update TasksSet', props<{ ta
 export const tasksSetUpdated = createAction('[Tasks] TasksSet Updated', props<{ tasks: Task[] }>());
 
 export const tasksSetUpdatedError = createAction('[Tasks] Error TasksSet Updated', props<{ error: Error }>());
+
+export const clearTasks = createAction('[Tasks] Clear Data');
