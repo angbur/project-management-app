@@ -1,4 +1,4 @@
-import { requestStatus } from './../../types';
+import { requestError, requestStatus } from './../../types';
 import { on } from '@ngrx/store';
 import { createReducer } from '@ngrx/store';
 import * as SystemActions from './system.actions';
@@ -28,7 +28,7 @@ export interface SystemState {
   isLoggedIn: boolean;
   userId: string | null;
   status: requestStatus;
-  error: Error | null;
+  error: requestError | null;
 }
 
 export const initialState: SystemState = {
@@ -41,11 +41,6 @@ export const initialState: SystemState = {
 
 export const systemReducers = createReducer(
   initialState,
-  on(SystemActions.setInitialToken, (state, { token }) => ({
-    ...state,
-    token: token,
-    isLoggedIn: true,
-  })),
   on(SystemActions.login, (state, { data }) => ({
     ...state,
     data: data,
@@ -82,5 +77,5 @@ export const systemReducers = createReducer(
 export const getAuthenticationData = (state: SystemState) => state.data;
 export const getUserToken = (state: SystemState) => state.token;
 export const getSystemStatus = (state: SystemState) => state.isLoggedIn;
-export const getSystemError = (state: SystemState) => state.error;
+export const getSystemError = (state: SystemState) => state.error && state.error.message;
 export const getUserId = (state: SystemState) => state.userId;

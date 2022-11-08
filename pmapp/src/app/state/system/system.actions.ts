@@ -1,14 +1,13 @@
 import { createAction, props } from '@ngrx/store';
+import { requestError } from 'src/app/types';
 import { UserData } from 'src/app/_services/user/user.model';
 import { AuthenticationData, AuthorizationData } from './system.reducer';
-
-export const setInitialToken = createAction('[System] Set Initial Token', props<{ token: string | null }>());
 
 export const login = createAction('[System] Log in User', props<{ data: AuthenticationData }>());
 
 export const loginSuccess = createAction('[System] Login Success', props<{ user: UserData }>());
 
-export const loginError = createAction('[System] Log in error', props<{ error: Error }>());
+export const loginError = createAction('[System] Log in error', props<{ error: requestError }>());
 
 export const logout = createAction('[System] Logout');
 
@@ -16,4 +15,4 @@ export const register = createAction('[System] Register', props<{ data: Authoriz
 
 export const registerSuccess = createAction('[System] Register Success');
 
-export const registerError = createAction('[System] Register Error', props<{ error: Error }>());
+export const registerError = createAction('[System] Register Error', props<{ error: requestError }>());

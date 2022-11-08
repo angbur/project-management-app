@@ -1,6 +1,7 @@
 import { TaskSet, NewTask } from './../../_services/tasks/task.model';
 import { createAction, props } from '@ngrx/store';
 import { Task } from 'src/app/_services/tasks/task.model';
+import { requestError } from 'src/app/types';
 
 export const loadTasks = createAction('[Tasks] Load Data');
 
@@ -27,12 +28,12 @@ export const updateTask = createAction(
 
 export const taskUpdated = createAction('[Tasks] Task Updated', props<{ task: Task }>());
 
-export const taskUpdatedError = createAction('[Tasks] Error Update', props<{ error: Error }>());
+export const taskUpdatedError = createAction('[Tasks] Error Update', props<{ error: requestError }>());
 
 export const updateTasksSet = createAction('[Tasks] Update TasksSet', props<{ tasks: TaskSet }>());
 
 export const tasksSetUpdated = createAction('[Tasks] TasksSet Updated', props<{ tasks: Task[] }>());
 
-export const tasksSetUpdatedError = createAction('[Tasks] Error TasksSet Updated', props<{ error: Error }>());
+export const tasksSetUpdatedError = createAction('[Tasks] Error TasksSet Updated', props<{ error: requestError }>());
 
 export const clearTasks = createAction('[Tasks] Clear Data');

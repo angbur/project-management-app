@@ -24,6 +24,7 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userId');
   }
 
   register(registerData: AuthorizationData): Observable<any> {
@@ -38,7 +39,8 @@ export class AuthService {
     return of(sessionStorage.getItem('token') ? sessionStorage.getItem('token') : null);
   }
 
-  setToken(token: string): void {
+  setToken(token: string, id: string): void {
     sessionStorage.setItem('token', token);
+    sessionStorage.setItem('userId', id);
   }
 }

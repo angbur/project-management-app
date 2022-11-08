@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { requestStatus } from 'src/app/types';
+import { requestError, requestStatus } from 'src/app/types';
 import { Board } from '../../_services/board/board.model';
 import * as BoardsActions from './boards.actions';
 
@@ -14,7 +14,7 @@ export interface BoardsState {
   boards: Board[] | null;
   selectedBoardId: string | null;
   status: requestStatus;
-  error: Error | null;
+  error: requestError | null;
 }
 
 export const initialState: BoardsState = {

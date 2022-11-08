@@ -29,6 +29,8 @@ export const selectUserId = createSelector(selectSystemState, fromSystem.getUser
 
 export const selectLoginStatus = createSelector(selectSystemState, fromSystem.getSystemStatus);
 
+export const getAuthError = createSelector(selectSystemState, fromSystem.getSystemError);
+
 export const getActualBoardId = createSelector(selectBoardState, fromBoards.getSelectedBoardId);
 
 export const getActualBoardTitle = createSelector(selectBoardState, fromBoards.getSelectBoardTitle);

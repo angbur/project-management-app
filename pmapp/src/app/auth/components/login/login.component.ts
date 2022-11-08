@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { login, setInitialToken } from 'src/app/state/system/system.actions';
-import { getSystemError, getSystemStatus, SystemState } from 'src/app/state/system/system.reducer';
+import { login, loginSuccess } from 'src/app/state/system/system.actions';
+import { getSystemStatus, SystemState } from 'src/app/state/system/system.reducer';
+import { getAuthError } from 'src/app/state';
+import { UserData } from 'src/app/_services/user/user.model';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ import { getSystemError, getSystemStatus, SystemState } from 'src/app/state/syst
 })
 export class LoginComponent implements OnInit {
   isLoggedIn: Observable<boolean>;
-  errorCode$: Observable<Error | null>;
+  errorCode$: Observable<string | null>;
   form: LoginForm = {
     login: '',
     password: '',
@@ -21,13 +23,19 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly store: Store<SystemState>, private router: Router, private authService: AuthService) {
     this.isLoggedIn = this.store.pipe(select(getSystemStatus));
-    this.errorCode$ = this.store.pipe(select(getSystemError));
+    this.errorCode$ = this.store.pipe(select(getAuthError));
   }
 
   ngOnInit(): void {
-    this.authService.getToken().subscribe((token: string | null) => {
-      this.store.dispatch(setInitialToken({ token: token as string }));
-    });
+    if (sessionStorage.getItem('token') && sessionStorage.getItem('userId')) {
+      const token = sessionStorage.getItem('token');
+      const id = sessionStorage.getItem('userId');
+      const user: UserData = {
+        token: token,
+        id: id as string,
+      };
+      this.store.dispatch(loginSuccess({ user }));
+    }
   }
 
   onSubmit(): void {

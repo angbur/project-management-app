@@ -17,11 +17,11 @@ export class SystemEffects {
         return this.AuthService.login({ login: data.data.login, password: data.data.password }).pipe(
           map((user: any) => {
             if (user.token) {
-              this.AuthService.setToken(user.token);
+              this.AuthService.setToken(user.token, user.id);
             }
             return SystemActions.loginSuccess({ user });
           }),
-          catchError(error => of(SystemActions.loginError({ error })))
+          catchError(error => of(SystemActions.loginError({ error: error.error })))
         );
       })
     )
@@ -54,7 +54,7 @@ export class SystemEffects {
       mergeMap((data: any) => {
         return this.AuthService.register(data.data).pipe(
           map(() => SystemActions.registerSuccess()),
-          catchError(error => of(SystemActions.registerError({ error })))
+          catchError(error => of(SystemActions.registerError({ error: error.error })))
         );
       })
     )

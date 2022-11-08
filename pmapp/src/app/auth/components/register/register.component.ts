@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getAuthError } from 'src/app/state';
 import { register } from 'src/app/state/system/system.actions';
-import { getSystemError, SystemState } from 'src/app/state/system/system.reducer';
+import { SystemState } from 'src/app/state/system/system.reducer';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { getSystemError, SystemState } from 'src/app/state/system/system.reducer
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  errorMessage: Observable<Error | null>;
+  errorMessage: Observable<string | null>;
   form: RegisterForm = {
     name: '',
     login: '',
@@ -18,7 +19,7 @@ export class RegisterComponent {
   };
 
   constructor(private readonly store: Store<SystemState>) {
-    this.errorMessage = this.store.pipe(select(getSystemError));
+    this.errorMessage = this.store.pipe(select(getAuthError));
   }
 
   onSubmit(): void {
