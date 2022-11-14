@@ -47,4 +47,4 @@ export const selectTasksState = createFeatureSelector<fromTasks.TasksState>('tas
 
 export const getActualTasksList = createSelector(selectTasksState, fromTasks.getTasks);
 
-export const selectUserLogin = createSelector(selectSystemState, fromSystem.getUserLogin);
+export const selectUserLogin = createSelector(selectSystemState, fromSystem.getUserUserName);

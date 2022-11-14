@@ -1,12 +1,17 @@
+import { selectUserId } from './../index';
+import { Store } from '@ngrx/store';
+import { User } from './../../_services/user/user.model';
+import { UserService } from './../../_services/user/user.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/_services/auth/auth.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import * as SystemActions from './system.actions';
+import { SystemState } from './system.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class SystemEffects {
@@ -94,6 +99,19 @@ export class SystemEffects {
     { dispatch: false }
   );
 
+  loadUserName = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SystemActions.loadUserName),
+      withLatestFrom(this.systemStore.select(selectUserId)),
+      mergeMap(([action, userId]) => {
+        return this.UserService.getUserById(userId as string).pipe(
+          map((data: any) => SystemActions.userNameLoaded({ userName: data.name })),
+          catchError(error => of(SystemActions.userNameLoadedError({ error: error.error })))
+        );
+      })
+    )
+  );
+
   gotoDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
@@ -105,7 +123,9 @@ export class SystemEffects {
   constructor(
     private actions$: Actions,
     private AuthService: AuthService,
+    private UserService: UserService,
     private router: Router,
+    private systemStore: Store<SystemState>,
     private toastr: ToastrService
   ) {}
 }

@@ -27,7 +27,7 @@ export interface SystemState {
   token: token;
   isLoggedIn: boolean;
   userId: string | null;
-  login: string | null;
+  userName: string | null;
   status: requestStatus;
   error: requestError | null;
 }
@@ -36,7 +36,7 @@ export const initialState: SystemState = {
   token: null,
   isLoggedIn: false,
   userId: null,
-  login: null,
+  userName: null,
   status: 'idle',
   error: null,
 };
@@ -46,7 +46,6 @@ export const systemReducers = createReducer(
   on(SystemActions.login, (state, { data }) => ({
     ...state,
     data: data,
-    login: data.login,
     status: 'loading...',
   })),
   on(SystemActions.loginSuccess, (state, { user }) => ({
@@ -67,7 +66,7 @@ export const systemReducers = createReducer(
     isLoggedIn: false,
     status: 'idle',
     userId: null,
-    login: null,
+    userName: null,
     error: null,
   })),
   on(SystemActions.register, state => ({ ...state, status: 'loading...' })),
@@ -76,7 +75,8 @@ export const systemReducers = createReducer(
     status: 'failed :(',
     error: error,
   })),
-  on(SystemActions.registerSuccess, state => ({ ...state, status: 'succeeded (:' }))
+  on(SystemActions.registerSuccess, state => ({ ...state, status: 'succeeded (:' })),
+  on(SystemActions.userNameLoaded, (state, { userName }) => ({ ...state, userName: userName }))
 );
 
 export const getAuthenticationData = (state: SystemState) => state.data;
@@ -84,4 +84,4 @@ export const getUserToken = (state: SystemState) => state.token;
 export const getSystemStatus = (state: SystemState) => state.isLoggedIn;
 export const getSystemError = (state: SystemState) => state.error && state.error.message;
 export const getUserId = (state: SystemState) => state.userId;
-export const getUserLogin = (state: SystemState) => state.login;
+export const getUserUserName = (state: SystemState) => state.userName;

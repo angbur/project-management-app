@@ -23,7 +23,7 @@ button.add-new-column-button {
   align-items: center;
   border-radius: 8px;
   padding: 1rem 1.8rem;
-  margin: 2rem;
+  margin: 2rem 0;
     h5 {
       margin-bottom: 0;
     }
@@ -39,7 +39,7 @@ button.add-new-column-button {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  margin-left: 2rem;
+  margin: 0 2rem;
   justify-content: space-between;
   align-items: center;
     h2 {

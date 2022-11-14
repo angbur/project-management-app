@@ -16,3 +16,12 @@ export const register = createAction('[System] Register', props<{ data: Authoriz
 export const registerSuccess = createAction('[System] Register Success');
 
 export const registerError = createAction('[System] Register Error', props<{ error: requestError }>());
+
+export const loadUserName = createAction('[System] Load UserName');
+
+export const userNameLoaded = createAction('[System] UserName data Loaded', props<{ userName: string }>());
+
+export const userNameLoadedError = createAction(
+  '[System] UserName Data Loaded Error',
+  props<{ error: requestError }>()
+);

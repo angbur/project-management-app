@@ -1,0 +1,10 @@
+img.avatar {
+  height: 100px;
+  width: 100px;
+}
+
+.profile-card {
+  &>h3 {
+    margin: 2rem 0;
+  }
+}
