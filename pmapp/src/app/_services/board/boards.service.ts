@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { Board } from './board.model';
 
-const API = 'https://whispering-refuge-23508.herokuapp.com/boards/';
+const API = `${environment.apiUrl}boards/`;
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class BoardsService {
   }
 
   getAllBoardsForUser(userId: string): Observable<any> {
-    return this.http.get<Board[]>('https://whispering-refuge-23508.herokuapp.com/boardsSet/' + userId, {
+    return this.http.get<Board[]>(`${environment.apiUrl}boardsSet/` + userId, {
       responseType: 'json',
     });
   }

@@ -6,7 +6,7 @@
         <mat-label>Title</mat-label>
         <input type="text" name="title" [(ngModel)]="form.title" required #title="ngModel" placeholder="Title" />
         <div class="alert alert-danger" role="alert" *ngIf="title.errors && f.submitted">
-          <img class="alert-icon" src="assets/icons/circle-exclamation.svg" alt="" />
+          <img class="alert-icon" src="/app/assets/icons/circle-exclamation.svg" alt="" />
           Title is required!
         </div>
         <button class="button button-secondary" type="button" (click)="onSubmit()">Create new board</button>

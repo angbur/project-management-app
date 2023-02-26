@@ -1,4 +1,4 @@
-import { token } from 'src/app/state/system/system.reducer';
+import { token } from 'state/system/system.reducer';
 
 export interface User {
   name: string;

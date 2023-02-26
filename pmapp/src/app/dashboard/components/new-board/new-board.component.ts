@@ -1,11 +1,11 @@
-import { addBoard } from './../../../state/boards/boards.actions';
-import { selectUserId } from './../../../state/index';
-import { SystemState } from './../../../state/system/system.reducer';
+import { addBoard } from 'state/boards/boards.actions';
+import { selectUserId } from 'state/index';
+import { SystemState } from 'state/system/system.reducer';
 import { Observable } from 'rxjs';
-import { BoardsState } from 'src/app/state/boards/boards.reducer';
+import { BoardsState } from 'state/boards/boards.reducer';
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
-import { Board, BoardData } from 'src/app/_services/board/board.model';
+import { Board, BoardData } from '_services/board/board.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,15 +18,13 @@ export class NewBoardComponent {
     title: '',
     users: [],
   };
-  owner$: Observable<string | null>;
+  owner$: Observable<string | null> = this.systemStore.select(selectUserId);
 
   constructor(
     private readonly store: Store<BoardsState>,
     private readonly systemStore: Store<SystemState>,
     private router: Router
-  ) {
-    this.owner$ = this.systemStore.select(selectUserId);
-  }
+  ) {}
 
   onSubmit(): void {
     const newBoard: Board = {

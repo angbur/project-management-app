@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { requestError, requestStatus } from 'src/app/types';
-import { Board } from '../../_services/board/board.model';
+import { requestError, requestStatus } from 'types';
+import { Board } from '_services/board/board.model';
 import * as BoardsActions from './boards.actions';
 
 const createBoard = (boards: Board[] | null, board: Board) => (boards ? [...boards, board] : [board]);

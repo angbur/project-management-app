@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { requestError } from 'src/app/types';
-import { Column } from 'src/app/_services/columns/column.model';
+import { requestError } from 'types';
+import { Column } from '_services/columns/column.model';
 
 export const loadColumns = createAction('[Columns] Load Data');
 

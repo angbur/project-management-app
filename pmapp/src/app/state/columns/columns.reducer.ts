@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Column } from 'src/app/_services/columns/column.model';
+import { Column } from '_services/columns/column.model';
 import * as ColumnsActions from './columns.actions';
 
 const createColumn = (columns: Column[] | null, column: Column) => [...(columns as Column[]), column];

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectActualBoardsStatus, selectAllBoards } from 'src/app/state';
-import { loadBoards, updateBoard } from 'src/app/state/boards/boards.actions';
-import { BoardsState } from 'src/app/state/boards/boards.reducer';
-import { login, loginSuccess } from 'src/app/state/system/system.actions';
-import { SystemState } from 'src/app/state/system/system.reducer';
-import { Board } from 'src/app/_services/board/board.model';
-import { UserData } from 'src/app/_services/user/user.model';
+import { selectActualBoardsStatus, selectAllBoards } from 'state';
+import { loadBoards, updateBoard } from 'state/boards/boards.actions';
+import { BoardsState } from 'state/boards/boards.reducer';
+import { login, loginSuccess } from 'state/system/system.actions';
+import { SystemState } from 'state/system/system.reducer';
+import { Board } from '_services/board/board.model';
+import { UserData } from '_services/user/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,9 +29,5 @@ export class DashboardComponent implements OnInit {
 
   getBoards() {
     this.store.dispatch(loadBoards());
-  }
-
-  updateBoard(board: Board) {
-    this.store.dispatch(updateBoard({ board: board }));
   }
 }

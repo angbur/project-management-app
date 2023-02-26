@@ -4,11 +4,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { ColumnsService } from './../../_services/columns/columns.service';
+import { ColumnsService } from '_services/columns/columns.service';
 import { getActualBoardId, getOrderToNewColumn } from './../index';
 import { ColumnsState } from './columns.reducer';
 import * as ColumnsActions from './columns.actions';
-import { Column } from '../../_services/columns/column.model';
+import { Column } from '_services/columns/column.model';
 import { BoardsState } from '../boards/boards.reducer';
 import { isString } from '../type.guard';
 

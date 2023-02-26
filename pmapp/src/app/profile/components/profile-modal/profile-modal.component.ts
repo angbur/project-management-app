@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile-modal',
   templateUrl: './profile-modal.component.html',
-  styleUrls: ['./profile-modal.component.scss']
+  styleUrls: ['./profile-modal.component.scss'],
 })
-export class ProfileModalComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ProfileModalComponent {
+  constructor() {}
 }

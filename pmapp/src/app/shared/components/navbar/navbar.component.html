@@ -1,6 +1,6 @@
 <mat-toolbar class="navbar">
   <a class="logo" routerLink="[]" routerLinkActive="active" ariaCurrentWhenActive="page">
-    <img src="assets/icons/logo.svg" alt="" />
+    <img src="app/assets/icons/logo.svg" alt="" />
     <h1 class="logo">savvy</h1>
   </a>
   <div class="button-section" *ngIf="(isLoggedIn$ | async) === false; else elseBlock">
@@ -14,11 +14,11 @@
   <ng-template #elseBlock>
     <div class="button-section">
       <button class="button button-text" (click)="navigateToDashboard()" type="button">
-        <img class="startIcon" src="assets/icons/table-columns-solid.svg" alt="" />
+        <img class="startIcon" src="app/assets/icons/table-columns-solid.svg" alt="" />
         Dashboard
       </button>
       <button class="button button-text" (click)="navigateToProfilePage()" type="button">
-        <img class="startIcon" src="assets/icons/user-solid.svg" alt="" />
+        <img class="startIcon" src="app/assets/icons/user-solid.svg" alt="" />
         {{ (userName$ | async) || 'Profile' }}
       </button>
       <button id="button-logout" type="button" class="button button-primary" (click)="handleLogout()">Logout</button>

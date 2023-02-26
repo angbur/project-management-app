@@ -1,15 +1,15 @@
-import { TaskSet, NewTask } from 'src/app/_services/tasks/task.model';
-import { updateTask } from './../../../../../state/tasks/tasks.actions';
+import { TaskSet, NewTask } from '_services/tasks/task.model';
+import { updateTask } from 'state/tasks/tasks.actions';
 import { Component, Input, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-import { Column } from 'src/app/_services/columns/column.model';
-import { Task, TasksEntities } from 'src/app/_services/tasks/task.model';
+import { Column } from '_services/columns/column.model';
+import { Task, TasksEntities } from '_services/tasks/task.model';
 import { NewTaskModalComponent } from '../new-task-modal/new-task-modal.component';
 import { isColumns, isTasks } from './type.guard';
-import { addTask, deleteTask, updateTasksSet } from 'src/app/state/tasks/tasks.actions';
+import { addTask, deleteTask, updateTasksSet } from 'state/tasks/tasks.actions';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 
 @Component({
@@ -18,6 +18,8 @@ import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal
   styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent implements OnChanges {
+  isOpen: boolean = false;
+  menuOpenId: number | null = null;
   @Input()
   columns: Column[] | null = null;
   @Input()
@@ -52,6 +54,11 @@ export class ColumnComponent implements OnChanges {
         this.tasksEntities[colId].tasks.sort((a, b) => a.order - b.order);
       }
     }
+  }
+
+  openColumnOptions(columnId: number) {
+    this.isOpen = !this.isOpen;
+    this.menuOpenId = columnId;
   }
 
   dropTask(event: CdkDragDrop<Task[]>) {

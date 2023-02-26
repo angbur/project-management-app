@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { BoardsState, getBoardsStatus } from 'src/app/state/boards/boards.reducer';
+import { BoardsState, getBoardsStatus } from 'state/boards/boards.reducer';
 import { Component, Input } from '@angular/core';
-import { Board } from 'src/app/_services/board/board.model';
+import { Board } from '_services/board/board.model';
 import { Store } from '@ngrx/store';
-import { deleteBoard, selectedBoard } from 'src/app/state/boards/boards.actions';
+import { deleteBoard, selectedBoard } from 'state/boards/boards.actions';
 
 @Component({
   selector: 'app-boards',

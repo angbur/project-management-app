@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getAuthError } from 'src/app/state';
-import { register } from 'src/app/state/system/system.actions';
-import { SystemState } from 'src/app/state/system/system.reducer';
+import { getAuthError } from 'state';
+import { register } from 'state/system/system.actions';
+import { SystemState } from 'state/system/system.reducer';
 
 @Component({
   selector: 'app-register',

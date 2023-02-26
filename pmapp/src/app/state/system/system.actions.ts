@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { requestError } from 'src/app/types';
-import { UserData } from 'src/app/_services/user/user.model';
+import { requestError } from 'types';
+import { UserData } from '_services/user/user.model';
 import { AuthenticationData, AuthorizationData } from './system.reducer';
 
 export const login = createAction('[System] Log in User', props<{ data: AuthenticationData }>());

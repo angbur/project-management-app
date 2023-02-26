@@ -7,28 +7,43 @@
     [cdkDropListData]="tasksEntities[i].tasks"
     (cdkDropListDropped)="dropTask($event)">
     <div class="column-header">
-      <h4>{{ column.title }}</h4>
+      <div class="row">
+        <h4>{{ column.title }}</h4>
+        <button class="button-icon" type="button" (click)="openColumnOptions(column._id)">
+          <img src="/app/assets/icons/options.svg" alt="" />
+        </button>
+        <div class="options-menu" *ngIf="isOpen && menuOpenId === column._id">
+          <ul class="menu-button-item">
+            <li>
+              <button type="button" class="button">Edit</button>
+            </li>
+            <li>
+              <button type="button" class="button">Delete</button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="column-container">
       <ul class="column-content">
         <button class="empty-task-item" type="button" (click)="addNewTask(columns ? columns[i]._id.toString() : '', i)">
-          <img src="assets/icons/plus-white.svg" />
+          <img src="/app/assets/icons/plus-white.svg" alt="" />
           Add task
         </button>
         <li class="task-item" cdkDrag *ngFor="let task of tasksEntities[i].tasks">
-          {{ task.title }}
+          <p>{{ task.title }}</p>
           <span class="task-menu">
             <button
               class="button-icon"
               type="button"
               (click)="update(columns ? columns[i]._id.toString() : '', task, task._id)">
-              <img src="assets/icons/pen-solid.svg" alt="" />
+              <img src="/app/assets/icons/pen-solid.svg" alt="" />
             </button>
             <button
               class="button-icon"
               type="button"
               (click)="delete(columns ? columns[i]._id.toString() : '', task._id)">
-              <img src="assets/icons/trash-solid.svg" alt="" />
+              <img src="/app/assets/icons/trash-solid.svg" alt="" />
             </button>
           </span>
         </li>

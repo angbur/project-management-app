@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
+import { environment } from '../../../environments/environment';
 
-const API = 'https://whispering-refuge-23508.herokuapp.com/';
+const API = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root',

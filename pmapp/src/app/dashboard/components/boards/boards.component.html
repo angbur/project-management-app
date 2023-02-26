@@ -1,7 +1,7 @@
 <div class="project-container">
   <div class="project-card empty-card">
     <a class="link-to-form" routerLink="/dashboard/new-board">
-      <img src="assets/icons/plus.svg" alt="" />
+      <img src="/app/assets/icons/plus.svg" alt="" />
       <p>Add new project</p>
     </a>
   </div>
@@ -9,7 +9,7 @@
     <button aria-label="Button to delete project" (click)="deleteBoard(board._id)">
       <mat-icon>delete</mat-icon>
     </button>
-    <img src="assets/icons/clipboard-solid.svg" alt="" />
+    <img src="/app/assets/icons/clipboard-solid.svg" alt="" />
     <p>{{ board.title }}</p>
   </div>
 </div>

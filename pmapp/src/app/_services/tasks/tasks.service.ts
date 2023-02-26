@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task, TaskSet, NewTask } from './task.model';
+import { environment } from '../../../environments/environment';
+import { TaskSet, NewTask } from './task.model';
 
-const API_baseURL = 'https://whispering-refuge-23508.herokuapp.com/';
-const API = API_baseURL + 'boards/';
+const API = `${environment.apiUrl}boards/`;
 
 @Injectable({
   providedIn: 'root',
@@ -33,16 +33,16 @@ export class TasksService {
   }
 
   getTaskByBoardId(boardId: string): Observable<Object> {
-    return this.http.get(API_baseURL + 'tasksSet/' + boardId, { responseType: 'json' });
+    return this.http.get(environment.apiUrl + 'tasksSet/' + boardId, { responseType: 'json' });
   }
 
   searchTask(userId?: string, searchQuery?: string): Observable<Object> {
-    return this.http.get(API_baseURL + 'tasksSet?userId=' + userId + '&search=' + searchQuery, {
+    return this.http.get(environment.apiUrl + 'tasksSet?userId=' + userId + '&search=' + searchQuery, {
       responseType: 'text',
     });
   }
 
   updateTaskSet(data: TaskSet) {
-    return this.http.patch(API_baseURL + 'tasksSet', data, { responseType: 'json' });
+    return this.http.patch(environment.apiUrl + 'tasksSet', data, { responseType: 'json' });
   }
 }

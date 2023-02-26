@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { SystemState } from '../state/system/system.reducer';
+import { SystemState } from 'state/system/system.reducer';
 
 const TOKEN_HEADER = 'Authorization';
 

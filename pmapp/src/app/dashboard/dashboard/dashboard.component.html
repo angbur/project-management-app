@@ -1,12 +1,14 @@
 <div id="dashboard">
   <h3>Your projects</h3>
   <div class="project-container">
-    <app-boards [boards]="boards$ | async" *ngIf="(statusBoards$ | async) !== 'loading...'; else spinner"></app-boards>
+    <ng-container *ngIf="(statusBoards$ | async) !== 'loading...'; else spinner">
+      <app-boards [boards]="boards$ | async"></app-boards>
+    </ng-container>
+    <ng-template #spinner>
+      <div class="container">
+        <app-spinner></app-spinner>
+      </div>
+    </ng-template>
   </div>
 </div>
 <app-footer></app-footer>
-<ng-template #spinner>
-  <div class="container">
-    <app-spinner></app-spinner>
-  </div>
-</ng-template>

@@ -1,9 +1,9 @@
-import { logout } from 'src/app/state/system/system.actions';
-import { selectLoginStatus, selectUserLogin } from 'src/app/state/index';
+import { logout } from 'state/system/system.actions';
+import { selectLoginStatus, selectUserLogin } from 'state/index';
 import { select, Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SystemState } from 'src/app/state/system/system.reducer';
+import { SystemState } from 'state/system/system.reducer';
 import { Observable } from 'rxjs';
 
 @Component({

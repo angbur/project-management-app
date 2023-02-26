@@ -1,12 +1,12 @@
-import { AuthService } from 'src/app/_services/auth/auth.service';
+import { AuthService } from '_services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { login, loginSuccess } from 'src/app/state/system/system.actions';
-import { getSystemStatus, SystemState } from 'src/app/state/system/system.reducer';
-import { getAuthError } from 'src/app/state';
-import { UserData } from 'src/app/_services/user/user.model';
+import { login, loginSuccess } from 'state/system/system.actions';
+import { getSystemStatus, SystemState } from 'state/system/system.reducer';
+import { getAuthError } from 'state';
+import { UserData } from '_services/user/user.model';
 
 @Component({
   selector: 'app-login',
@@ -14,17 +14,14 @@ import { UserData } from 'src/app/_services/user/user.model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  isLoggedIn: Observable<boolean>;
-  errorCode$: Observable<string | null>;
+  isLoggedIn: Observable<boolean> = this.store.pipe(select(getSystemStatus));
+  errorCode$: Observable<string | null> = this.store.pipe(select(getAuthError));
   form: LoginForm = {
     login: '',
     password: '',
   };
 
-  constructor(private readonly store: Store<SystemState>, private router: Router, private authService: AuthService) {
-    this.isLoggedIn = this.store.pipe(select(getSystemStatus));
-    this.errorCode$ = this.store.pipe(select(getAuthError));
-  }
+  constructor(private readonly store: Store<SystemState>, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     if (sessionStorage.getItem('token') && sessionStorage.getItem('userId')) {
@@ -40,10 +37,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.store.dispatch(login({ data: this.form }));
-  }
-
-  gotoDashboard(): void {
-    this.router.navigate(['/dashboard']);
   }
 }
 

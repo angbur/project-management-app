@@ -6,10 +6,10 @@ import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-import { BoardsService } from 'src/app/_services/board/boards.service';
+import { BoardsService } from '_services/board/boards.service';
 import { SystemState } from '../system/system.reducer';
 import { selectUserId } from './../index';
-import { Board } from 'src/app/_services/board/board.model';
+import { Board } from '_services/board/board.model';
 import * as BoardsActions from './boards.actions';
 
 @Injectable({ providedIn: 'root' })

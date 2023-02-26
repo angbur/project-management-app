@@ -1,4 +1,4 @@
-import { requestError, requestStatus } from './../../types';
+import { requestError, requestStatus } from 'types';
 import { on } from '@ngrx/store';
 import { createReducer } from '@ngrx/store';
 import * as SystemActions from './system.actions';

@@ -1,7 +1,7 @@
-import { TaskSet, NewTask } from './../../_services/tasks/task.model';
+import { TaskSet, NewTask } from '_services/tasks/task.model';
 import { createAction, props } from '@ngrx/store';
-import { Task } from 'src/app/_services/tasks/task.model';
-import { requestError } from 'src/app/types';
+import { Task } from '_services/tasks/task.model';
+import { requestError } from 'types';
 
 export const loadTasks = createAction('[Tasks] Load Data');
 

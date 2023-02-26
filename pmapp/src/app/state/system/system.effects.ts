@@ -1,12 +1,12 @@
 import { selectUserId } from './../index';
 import { Store } from '@ngrx/store';
-import { User } from './../../_services/user/user.model';
-import { UserService } from './../../_services/user/user.service';
+import { User } from '_services/user/user.model';
+import { UserService } from '_services/user/user.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/_services/auth/auth.service';
+import { AuthService } from '_services/auth/auth.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';

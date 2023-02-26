@@ -1,4 +1,4 @@
-@use '../../../../assets/scss/index' as *;
+@use 'assets/scss/index' as *;
 
 .board-container{
   display: flex;
@@ -11,7 +11,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 100%;
   gap: 2rem;
 }
 

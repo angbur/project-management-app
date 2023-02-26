@@ -6,10 +6,10 @@ import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 import { TasksState } from './tasks.reducer';
-import { BoardsState } from 'src/app/state/boards/boards.reducer';
+import { BoardsState } from 'state/boards/boards.reducer';
 import * as TasksActions from './tasks.actions';
-import { NewTask, Task } from 'src/app/_services/tasks/task.model';
-import { TasksService } from 'src/app/_services/tasks/tasks.service';
+import { NewTask, Task } from '_services/tasks/task.model';
+import { TasksService } from '_services/tasks/tasks.service';
 import { getActualBoardId, selectUserId } from './../index';
 import { SystemState } from '../system/system.reducer';
 import { isString } from '../type.guard';

@@ -1,8 +1,8 @@
-@use '../../../../../../assets/scss/index' as *;
+@use 'assets/scss/index' as *;
 
 .column-row {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 2rem;
 }
@@ -13,15 +13,26 @@
   align-items: center;
   border-radius: 8px;
   background: $secondary-light;
-  width: 220px;
+  width: 260px;
+  height: 70vh;
     .column-header {
-      text-align: center;
-      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 86%;
       border-bottom: 2px solid white;
-      padding: 0.8rem 0.4rem;
-        &> h4 {
-          color: $primary-dark;
-          font-weight: 500;
+      padding: 1rem;
+        &>.row {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          &>h4 {
+            color: $primary-dark;
+            margin: 0 1rem;
+          }
+          &>.button-icon {
+            width: 13px;
+          }
         }
     }
     .column-content {
@@ -32,10 +43,11 @@
       width: 100%;
     }
     .task-item {
-      cursor:move;
+      cursor: move;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
       padding: 0.3rem;
@@ -52,6 +64,10 @@
           box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
                       0 8px 10px 1px rgba(0, 0, 0, 0.14),
                       0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        &>p {
+          overflow-wrap: anywhere;
+          margin-bottom: 0;
         }
     }
     h4 {

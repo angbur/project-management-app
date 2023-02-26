@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { NewColumn } from './column.model';
 
-const API = 'https://whispering-refuge-23508.herokuapp.com/boards/';
+const API = `${environment.apiUrl}boards/}`;
 
 @Injectable({
   providedIn: 'root',

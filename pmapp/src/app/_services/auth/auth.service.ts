@@ -1,12 +1,12 @@
-import { selectLoginStatus } from './../../state/index';
-import { getSystemStatus } from './../../state/system/system.reducer';
+import { selectLoginStatus } from 'state/index';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { AuthenticationData, AuthorizationData, SystemState } from 'src/app/state/system/system.reducer';
+import { AuthenticationData, AuthorizationData, SystemState } from 'state/system/system.reducer';
 import { Store } from '@ngrx/store';
+import { environment } from '../../../environments/environment';
 
-const API = 'https://whispering-refuge-23508.herokuapp.com/auth/';
+const API = `${environment.apiUrl}auth/`;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

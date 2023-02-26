@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { requestError } from 'src/app/types';
-import { Board } from '../../_services/board/board.model';
+import { requestError } from 'types';
+import { Board } from '_services/board/board.model';
 
 export const selectedBoard = createAction('[Boards] Selected Board', props<{ board: Board }>());
 

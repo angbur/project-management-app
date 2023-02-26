@@ -1,7 +1,7 @@
-@use '../../../../assets/scss/index' as *;
+@use 'assets/scss/index' as *;
 
 #second-section {
-    background-image: url("/assets/img/sec-background.svg");
+    background-image: url("/app/assets/img/sec-background.svg");
     background-position: center;
     background-repeat: no-repeat;
   h3 {

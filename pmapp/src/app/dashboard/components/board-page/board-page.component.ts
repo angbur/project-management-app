@@ -1,18 +1,18 @@
-import { getActualColumnsList, getActualTasksList, getActualBoardTitle } from './../../../state/index';
+import { getActualColumnsList, getActualTasksList, getActualBoardTitle } from 'state/index';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { clearColumns, loadColumns } from 'src/app/state/columns/columns.actions';
-import { ColumnsState } from 'src/app/state/columns/columns.reducer';
-import { Column } from 'src/app/_services/columns/column.model';
-import { clearTasks, loadTasks } from 'src/app/state/tasks/tasks.actions';
-import { Task } from 'src/app/_services/tasks/task.model';
+import { clearColumns, loadColumns } from 'state/columns/columns.actions';
+import { ColumnsState } from 'state/columns/columns.reducer';
+import { Column } from '_services/columns/column.model';
+import { clearTasks, loadTasks } from 'state/tasks/tasks.actions';
+import { Task } from '_services/tasks/task.model';
 import { MatDialog } from '@angular/material/dialog';
-import { BoardsState } from 'src/app/state/boards/boards.reducer';
+import { BoardsState } from 'state/boards/boards.reducer';
 import { addColumn } from './../../../state/columns/columns.actions';
 import { NewColumnModalComponent } from './components/new-column-modal/new-column-modal.component';
 import { Router } from '@angular/router';
-import { clearSelectedBoards } from 'src/app/state/boards/boards.actions';
+import { clearSelectedBoards } from 'state/boards/boards.actions';
 
 @Component({
   selector: 'app-board-page',
